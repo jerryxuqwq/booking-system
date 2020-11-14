@@ -1,0 +1,40 @@
+/*
+ * LoginPage.h
+ *
+ *  Created on: Sep 8, 2020
+ *      Author: jerry
+ */
+#ifndef GTKMM_EXAMPLEWINDOW_H
+#define GTKMM_EXAMPLEWINDOW_H
+
+#include <gtkmm.h>
+#include <User.h>
+#include <ctime>
+#include <UserPage.h>
+
+
+class LoginPage: public Gtk::Window
+{
+
+public:
+	LoginPage(User *LoginUser);
+	virtual ~LoginPage();
+
+
+protected:
+
+	//Signal handlers:
+	void on_Buttom_Login_A(User *LoginUser);
+	void on_Buttom_Login_B(User *LoginUser);
+
+	//Child widgets:
+//	Gtk::Box m_HBox1, m_HBox2;
+//	Gtk::Box m_VBox;
+	Gtk::Grid m_grid;
+	Gtk::Entry m_Entry_Username, m_Entry_Password;
+	Gtk::Button m_Button_Login;
+	Gtk::Label m_Label_Password, m_Label_Username;
+
+};
+
+#endif //GTKMM_EXAMPLEWINDOW_H
