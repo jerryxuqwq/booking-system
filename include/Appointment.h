@@ -11,6 +11,7 @@
 #include <mysql++.h>
 #include <vector>
 #include <datetime.h>
+#include "Global.h"
 #include <string>
 struct appointment_data
 {
@@ -22,7 +23,7 @@ struct appointment_data
 class Appointment
 {
 public:
-	appointment_data* Update();
+	std::vector<appointment_data> Update();
 	Appointment();
 	virtual ~Appointment();
 

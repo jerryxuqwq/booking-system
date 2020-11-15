@@ -4,9 +4,9 @@
 #include <mysql++.h>
 //#include <Windows.h>
 #include <Appointment.h>
-#include <User.h>
-#include <LoginPage.h>
-#include <UserPage.h>
+#include "User.h"
+#include "LoginPage.h"
+#include "UserPage.h"
 
 using namespace std;
 int main(int argc, char *argv[])
@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
 //	test.Update();
 
 	auto app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
-	User NewUser;
-	LoginPage window(&NewUser);
+	//User NewUser;
+	LoginPage window;
 	return app->run(window);
 
 //	User NewUser;

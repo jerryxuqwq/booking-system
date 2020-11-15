@@ -2,7 +2,7 @@
  * Report.cpp
  *
  *  Created on: Oct 29, 2020
- *      Author: jerry
+ *      Author: clTabCtrljerry
  */
 
 #include "Report.h"
@@ -17,4 +17,3 @@ Report::~Report()
 {
 	// TODO Auto-generated destructor stub
 }
-

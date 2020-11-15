@@ -15,7 +15,7 @@
 class UserPage: public Gtk::Window
 {
 public:
-	UserPage(User_data LoginUser);
+	UserPage();
 	virtual ~UserPage();
 protected:
 	//Signal handlers:

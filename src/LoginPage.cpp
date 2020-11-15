@@ -8,9 +8,11 @@
 #include "LoginPage.h"
 #include <iostream>
 
-LoginPage::LoginPage(User *LoginUser) :
-		m_Button_Login("Login"), m_Label_Username("Username:"), m_Label_Password(
-				"Password:")
+
+
+LoginPage::LoginPage() :
+	m_Button_Login("Login"), m_Label_Username("Username:"), m_Label_Password(
+	    "Password:")
 //,m_VBox(Gtk::ORIENTATION_VERTICAL)
 {
 	set_size_request(250, 100);
@@ -36,22 +38,13 @@ LoginPage::LoginPage(User *LoginUser) :
 	m_Button_Login.set_can_default();
 	m_Button_Login.grab_default();
 	m_grid.attach_next_to(m_Button_Login, m_Entry_Password, Gtk::POS_BOTTOM, 2,
-			1);
+	                      1);
 
 	show_all_children();
 
 	m_Button_Login.signal_clicked().connect(
-			sigc::bind<User*>(
-					sigc::mem_fun(*this, &LoginPage::on_Buttom_Login_A),
-					LoginUser));
+	    sigc::mem_fun(*this,&LoginPage::on_Buttom_Login_A));
 
-	m_Button_Login.signal_clicked().connect(
-			sigc::mem_fun(*LoginUser, &User::Login));
-
-	m_Button_Login.signal_clicked().connect(
-			sigc::bind<User*>(
-					sigc::mem_fun(*this, &LoginPage::on_Buttom_Login_B),
-					LoginUser));
 
 }
 
@@ -59,7 +52,7 @@ LoginPage::~LoginPage()
 {
 }
 
-void LoginPage::on_Buttom_Login_A(User *LoginUser)
+void LoginPage::on_Buttom_Login_A()
 {
 
 //	int i= NewUser.CheakLogin();
@@ -91,31 +84,31 @@ void LoginPage::on_Buttom_Login_A(User *LoginUser)
 //	}
 	//sleep(1);
 
-	LoginUser->SetUsername(m_Entry_Username.get_text());
-	LoginUser->SetPassword(m_Entry_Password.get_text());
-	std::cout << "Get box input" << m_Entry_Username.get_text() << " "
-			<< m_Entry_Password.get_text();
+//	LoginUser->SetUsername(m_Entry_Username.get_text());
+//	LoginUser->SetPassword(m_Entry_Password.get_text());
+//	std::cout << "Get box input" << m_Entry_Username.get_text() << " "
+//			<< m_Entry_Password.get_text();
+	User LoginUser;
 
-}
-void LoginPage::on_Buttom_Login_B(User *LoginUser)
-{
-
-//	std::cout << "in" << LoginUser->GetLoginUser().user_id << std::endl;
-
-	if (LoginUser->GetLoginUser().is_login == 1)
+	if(LoginUser.Login(m_Entry_Username.get_text(),
+	                   m_Entry_Password.get_text()) == 1)
 	{
 		std::cout << "pushed" << std::endl;
-		UserPage win(LoginUser->GetLoginUser());
+		UserPage win;
 		hide();
 		auto app = Gtk::Application::create();
 		app->run(win);
+		LoginUser.Update(LoginUserData.user_id);
 
 	}
+
 	else
 	{
 		Gtk::MessageDialog dialog(*this, "Error");
 		dialog.set_secondary_text("Error");
 		dialog.run();
 	}
+
+
 
 }

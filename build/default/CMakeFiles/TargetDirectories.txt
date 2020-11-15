@@ -1,3 +1,0 @@
-/home/jerry/cdt-master/ws/test/build/default/CMakeFiles/rebuild_cache.dir
-/home/jerry/cdt-master/ws/test/build/default/CMakeFiles/edit_cache.dir
-/home/jerry/cdt-master/ws/test/build/default/CMakeFiles/test.dir

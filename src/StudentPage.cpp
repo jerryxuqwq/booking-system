@@ -11,20 +11,18 @@
 using namespace std;
 
 
-int length(appointment_data* arr)
-{
-	cout << sizeof(arr[0]) << endl;
-	cout << sizeof(arr) << endl;
-	return sizeof(arr) / sizeof(&arr[0]);
-}
 
 StudentPage::StudentPage()
 {
-	appointment_data *data;
+	vector<appointment_data> data;
 	Appointment apm_data;
+
 	data = apm_data.Update();
-	std::cout<<"I'm fine"<<length(data)<<std::endl;
-	//Create the Tree model:
+	std::cout<<"I'm fine"<<data.size()<<std::endl;
+
+
+
+
 	m_refTreeModel = Gtk::ListStore::create(m_Columns);
 	set_model(m_refTreeModel);
 	//Fill the TreeView's model
@@ -32,9 +30,8 @@ StudentPage::StudentPage()
 	//row = *(m_refTreeModel->append());
 	row[m_Columns.m_col_apm_id] = 100;
 	row[m_Columns.m_col_room_name] = "测试房间2";
-	//appointment_data *data = apm_data.Update();
 
-	for (int i = 0; i < length(data); i++)
+	for(int i = 0; i < data.size(); i++)
 	{
 		std::cout << "foring" << std::endl;
 		row = *(m_refTreeModel->append());
@@ -54,18 +51,18 @@ StudentPage::StudentPage()
 
 	//Fill popup menu:
 	auto item = Gtk::make_managed<Gtk::MenuItem>("_Edit", true);
-	item->signal_activate().connect(
-			sigc::mem_fun(*this, &StudentPage::on_menu_file_popup_generic));
+	item->signal_activate().connect(sigc::mem_fun(*this,
+	                                &StudentPage::on_menu_file_popup_generic));
 	m_Menu_Popup.append(*item);
 
 	item = Gtk::make_managed<Gtk::MenuItem>("_Process", true);
 	item->signal_activate().connect(
-			sigc::mem_fun(*this, &StudentPage::on_menu_file_popup_generic));
+	    sigc::mem_fun(*this, &StudentPage::on_menu_file_popup_generic));
 	m_Menu_Popup.append(*item);
 
 	item = Gtk::make_managed<Gtk::MenuItem>("_Remove", true);
 	item->signal_activate().connect(
-			sigc::mem_fun(*this, &StudentPage::on_menu_file_popup_generic));
+	    sigc::mem_fun(*this,&StudentPage::on_menu_file_popup_generic));
 	m_Menu_Popup.append(*item);
 
 	m_Menu_Popup.accelerate(*this);
@@ -85,7 +82,7 @@ bool StudentPage::on_button_press_event(GdkEventButton *button_event)
 	return_value = TreeView::on_button_press_event(button_event);
 
 	//Then do our custom stuff:
-	if ((button_event->type == GDK_BUTTON_PRESS) && (button_event->button == 3))
+	if((button_event->type == GDK_BUTTON_PRESS) && (button_event->button == 3))
 	{
 		m_Menu_Popup.popup_at_pointer((GdkEvent*) button_event);
 
@@ -102,10 +99,12 @@ void StudentPage::on_menu_file_popup_generic()
 	std::cout << "A popup menu item was selected." << std::endl;
 
 	auto refSelection = get_selection();
-	if (refSelection)
+
+	if(refSelection)
 	{
 		Gtk::TreeModel::iterator iter = refSelection->get_selected();
-		if (iter)
+
+		if(iter)
 		{
 			int id = (*iter)[m_Columns.m_col_apm_id];
 			std::cout << "  Selected ID=" << id << std::endl;

@@ -10,6 +10,7 @@
 #include <UserPage.h>
 #include <LoginPage.h>
 
+
 User::User()
 {
 	std::cout << "New User" << std::endl;
@@ -22,88 +23,95 @@ User::~User()
 
 }
 
-void User::Login()
+int User::Login(Glib::ustring Username, Glib::ustring Password)
 {
 
 	mysqlpp::Connection conn(false);
 
-	if (conn.connect(db, server, user, password))
+	if(conn.connect(db, server, user, password))
 	{
 
 		mysqlpp::Query query = conn.query("SELECT * FROM user");
-		if (mysqlpp::StoreQueryResult res = query.store())
+
+		if(mysqlpp::StoreQueryResult res = query.store())
 		{
 
 			mysqlpp::StoreQueryResult::const_iterator it;
-			for (it = res.begin(); it != res.end(); ++it)
+
+			for(it = res.begin(); it != res.end(); ++it)
 			{
 				mysqlpp::Row row = *it;
 				std::cout << "1:" << row[2] << std::endl;
 				std::cout << "2:" << row[3] << std::endl;
-				if (row[2] == Username && row[3] == Password)
+
+				if(row[2] == Username && row[3] == Password)
 				{
 					std::cout << row[0] << std::endl;
 
 					Update(row[0]);
-					LoginUser.is_login = true;
+					LoginUserData.is_login = true;
+					return 1;
+
 
 				}
-				else if (it >= res.end())
+
+				else if(it >= res.end())
 				{
-					//return 0;
-					LoginUser.is_login = false;
+
+					LoginUserData.is_login = false;
+					return 0;
 				}
 			}
 		}
 
 	}
 
+	else
+	{
+		std::cout<<"cannot connect to the database"<<std::endl;
+	}
+
 }
+
 int User::Update(int in_user_id)
 {
 
 	mysqlpp::Connection conn(false);
 
-	if (conn.connect(db, server, user, password))
+	if(conn.connect(db, server, user, password))
 	{
 
 		mysqlpp::Query query = conn.query(
-				"SELECT * FROM `user` WHERE `user_id`="
-						+ std::to_string(in_user_id));
-		if (mysqlpp::StoreQueryResult res = query.store())
+		                           "SELECT * FROM `user` WHERE `user_id`="
+		                           + std::to_string(in_user_id));
+
+		if(mysqlpp::StoreQueryResult res = query.store())
 		{
 			std::cout << "updateing" << std::endl;
 
 			mysqlpp::StoreQueryResult::const_iterator it;
-			for (it = res.begin(); it != res.end(); ++it)
+
+			for(it = res.begin(); it != res.end(); ++it)
 			{
 				mysqlpp::Row row = *it;
-				LoginUser.user_name.assign(row[1]);
-				LoginUser.user_loginname.assign(row[2]);
-				LoginUser.user_password.assign(row[3]);
-				LoginUser.user_email.assign(row[4]);
-				LoginUser.user_level = row[5];
-				LoginUser.user_status = row[6];
+				LoginUserData.user_name.assign(row[1]);
+				LoginUserData.user_loginname.assign(row[2]);
+				LoginUserData.user_password.assign(row[3]);
+				LoginUserData.user_email.assign(row[4]);
+				LoginUserData.user_level = row[5];
+				LoginUserData.user_status = row[6];
 				std::cout << " " << row[0] << row[1] << row[2] << row[3]
-						<< row[4] << row[5] << row[6] << std::endl;
-				std::cout << LoginUser.user_id << std::endl;
+				          << row[4] << row[5] << row[6] << std::endl;
+				std::cout << LoginUserData.user_id << std::endl;
 			}
 
 		}
+
 		return 0;
 
 	}
+
 	else
 		return -1;
 
-}
-
-const User_data& User::GetLoginUser() const
-{
-	return LoginUser;
-}
-
-void User::SetLoginUser(const User_data &loginUser)
-{
-	LoginUser = loginUser;
 }

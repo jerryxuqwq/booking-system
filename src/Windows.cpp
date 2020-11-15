@@ -8,7 +8,7 @@
 #include "Windows.h"
 
 Windows::Windows(User *input_User) :
-		m_Button_Login("Test")
+	m_Button_Login("Test")
 {
 
 	set_size_request(250, 100);
@@ -32,4 +32,3 @@ Windows::~Windows()
 
 	// TODO Auto-generated destructor stub
 }
-
