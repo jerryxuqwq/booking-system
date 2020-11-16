@@ -93,13 +93,11 @@ void LoginPage::on_Buttom_Login_A()
 	if(LoginUser.Login(m_Entry_Username.get_text(),
 	                   m_Entry_Password.get_text()) == 1)
 	{
-		std::cout << "pushed" << std::endl;
 		UserPage win;
-		hide();
 		auto app = Gtk::Application::create();
+		hide();
 		app->run(win);
-		LoginUser.Update(LoginUserData.user_id);
-
+		
 	}
 
 	else

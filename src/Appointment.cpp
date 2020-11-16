@@ -23,10 +23,9 @@ std::vector<appointment_data> Appointment::Update()
 //			*password = "jtO3ngAeISZKFH0O";
 	mysqlpp::Connection conn(false);
 	conn.set_option(new mysqlpp::SetCharsetNameOption("utf8"));
-	mysqlpp::Query query = conn.query("SELECT * FROM `appointment`");
-
 	std::cout << conn.connect(db, server, user, password) << std::endl;
 	//appointment_data *data = new appointment_data[query.end];
+	mysqlpp::Query query = conn.query("SELECT * FROM `appointment`");
 	int temp = query.end+1;
 	std::vector<appointment_data> data;
 	appointment_data apm_data;
@@ -34,7 +33,6 @@ std::vector<appointment_data> Appointment::Update()
 	if(mysqlpp::StoreQueryResult res = query.store())
 	{
 		int i = 0;
-		std::cout << "connect to the database" << std::endl;
 
 		mysqlpp::StoreQueryResult::const_iterator it;
 
@@ -60,14 +58,9 @@ std::vector<appointment_data> Appointment::Update()
 //					<< apm_data.apm_begin_date << "  "
 //					<< apm_data.apm_approve_status << std::endl;
 			i++;
-			std::cout << "const_iterator"<< i << std::endl;
 		}
 
-		std::cout << "finish1" << std::endl;
 	}
-
-	std::cout << "finish2" << std::endl;
-
 
 	return data;
 }

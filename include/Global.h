@@ -1,6 +1,8 @@
 #ifndef GLOBAL_H_
 #define GLOBAL_H_
 #include <gtkmm.h>
+#include <iostream>
+#include "mysql++.h"
 struct User_data
 {
 	int user_id; // as same as database

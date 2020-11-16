@@ -14,11 +14,11 @@ UserPage::~UserPage()
 
 UserPage::UserPage() :
 	m_VBox(Gtk::ORIENTATION_VERTICAL), m_Button_Quit("Quit"), m_Label_Username(
-	    "test", true)
+	    "test", true),m_Button_New("New")
 {
 	set_title("Meeting system GUI");
 	set_border_width(5);
-	set_default_size(400, 200);
+	set_default_size(600, 300);
 
 	add(m_VBox);
 
@@ -33,6 +33,7 @@ UserPage::UserPage() :
 
 	m_ButtonBox.pack_start(m_Label_Username);
 	m_Label_Username.set_text("欢迎 "+ LoginUserData.user_name);
+	m_ButtonBox.pack_start(m_Button_New);
 	m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
 	m_ButtonBox.set_border_width(5);
 	m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);

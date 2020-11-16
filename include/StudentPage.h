@@ -11,6 +11,7 @@
 #include <gtkmm.h>
 #include <ctime>
 #include <Appointment.h>
+#include "Rooms.h"
 
 class StudentPage: public Gtk::TreeView
 {
@@ -38,12 +39,16 @@ protected:
 			add(m_col_room_name);
 			add(m_col_begin_time);
 			add(m_col_end_time);
+			add(m_col_approve_status);
+			add(m_col_reason);
 		}
 
 		Gtk::TreeModelColumn<unsigned int> m_col_apm_id;
 		Gtk::TreeModelColumn<Glib::ustring> m_col_room_name;
-		Gtk::TreeModelColumn<Glib::ustring> m_col_begin_time;
 		Gtk::TreeModelColumn<Glib::ustring> m_col_end_time;
+		Gtk::TreeModelColumn<Glib::ustring> m_col_begin_time;
+		Gtk::TreeModelColumn<Glib::ustring> m_col_reason;
+		Gtk::TreeModelColumn<Glib::ustring> m_col_approve_status;
 
 	};
 

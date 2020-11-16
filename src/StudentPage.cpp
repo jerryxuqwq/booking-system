@@ -18,7 +18,7 @@ StudentPage::StudentPage()
 	Appointment apm_data;
 
 	data = apm_data.Update();
-	std::cout<<"I'm fine"<<data.size()<<std::endl;
+	//std::cout<<"I'm fine"<<data.size()<<std::endl;
 
 
 
@@ -33,23 +33,48 @@ StudentPage::StudentPage()
 
 	for(int i = 0; i < data.size(); i++)
 	{
-		std::cout << "foring" << std::endl;
+		Rooms room(data[i].apm_room_id);
+		std::string begin=data[i].apm_begin_date, end=data[i].apm_end_date;
 		row = *(m_refTreeModel->append());
 		row[m_Columns.m_col_apm_id] = data[i].apm_id;
-		row[m_Columns.m_col_room_name] = data[i].apm_reason;
+		row[m_Columns.m_col_room_name]=room.GetRoomName();
+		row[m_Columns.m_col_begin_time] = begin;
+		row[m_Columns.m_col_end_time] = end;
+		row[m_Columns.m_col_reason] = data[i].apm_reason;
+
+		switch(data[i].apm_approve_status)
+		{
+		case 1:
+			row[m_Columns.m_col_approve_status] = "Yes";
+			break;
+
+		case 0:
+			row[m_Columns.m_col_approve_status] = "Waiting";
+			break;
+
+		case -1:
+			row[m_Columns.m_col_approve_status] = "Reject";
+			break;
+
+		default:
+			row[m_Columns.m_col_approve_status]=std::to_string(data[i].apm_approve_status);
+		}
+
+	}
 
 //		row = *(m_refTreeModel->append());
 //		row[m_Columns.m_col_apm_id] = i;
 //		row[m_Columns.m_col_room_name] = "测试房间2";
-	}
 
-	//Add the TreeView's view columns:
+
+//Add the TreeView's view columns:
 	append_column("APID", m_Columns.m_col_apm_id);
 	append_column("ROOM", m_Columns.m_col_room_name);
 	append_column("BEGIN_DATA", m_Columns.m_col_begin_time);
 	append_column("END_DATA", m_Columns.m_col_end_time);
-
-	//Fill popup menu:
+	append_column("REASON",m_Columns.m_col_reason);
+	append_column("APPROVE",m_Columns.m_col_approve_status);
+//Fill popup menu:
 	auto item = Gtk::make_managed<Gtk::MenuItem>("_Edit", true);
 	item->signal_activate().connect(sigc::mem_fun(*this,
 	                                &StudentPage::on_menu_file_popup_generic));

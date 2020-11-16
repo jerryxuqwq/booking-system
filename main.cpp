@@ -7,17 +7,23 @@
 #include "User.h"
 #include "LoginPage.h"
 #include "UserPage.h"
+#include "Rooms.h"
+#include "Global.h"
 
 using namespace std;
+
 int main(int argc, char *argv[])
 {
-//	Appointment test;
-//	test.Update();
+	Appointment test;
+	test.Update();
 
 	auto app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
 	//User NewUser;
 	LoginPage window;
 	return app->run(window);
+
+//Rooms room(1);
+//cout<<string(room.GetRoomDsp())<<endl;
 
 //	User NewUser;
 //	NewUser.window();

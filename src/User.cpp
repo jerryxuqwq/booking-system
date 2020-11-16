@@ -13,7 +13,6 @@
 
 User::User()
 {
-	std::cout << "New User" << std::endl;
 	// TODO Auto-generated constructor stub
 
 }
@@ -41,8 +40,6 @@ int User::Login(Glib::ustring Username, Glib::ustring Password)
 			for(it = res.begin(); it != res.end(); ++it)
 			{
 				mysqlpp::Row row = *it;
-				std::cout << "1:" << row[2] << std::endl;
-				std::cout << "2:" << row[3] << std::endl;
 
 				if(row[2] == Username && row[3] == Password)
 				{
@@ -50,6 +47,7 @@ int User::Login(Glib::ustring Username, Glib::ustring Password)
 
 					Update(row[0]);
 					LoginUserData.is_login = true;
+
 					return 1;
 
 
@@ -87,7 +85,6 @@ int User::Update(int in_user_id)
 
 		if(mysqlpp::StoreQueryResult res = query.store())
 		{
-			std::cout << "updateing" << std::endl;
 
 			mysqlpp::StoreQueryResult::const_iterator it;
 
@@ -100,9 +97,9 @@ int User::Update(int in_user_id)
 				LoginUserData.user_email.assign(row[4]);
 				LoginUserData.user_level = row[5];
 				LoginUserData.user_status = row[6];
-				std::cout << " " << row[0] << row[1] << row[2] << row[3]
-				          << row[4] << row[5] << row[6] << std::endl;
-				std::cout << LoginUserData.user_id << std::endl;
+//				std::cout << " " << row[0] << row[1] << row[2] << row[3]
+//				          << row[4] << row[5] << row[6] << std::endl;
+//				std::cout << LoginUserData.user_id << std::endl;
 			}
 
 		}
