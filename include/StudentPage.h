@@ -12,12 +12,15 @@
 #include <ctime>
 #include <Appointment.h>
 #include "Rooms.h"
+#include "Global.h"
 
 class StudentPage: public Gtk::TreeView
 {
 public:
 	StudentPage();
 	virtual ~StudentPage();
+	void Update();
+
 
 protected:
 
@@ -58,6 +61,8 @@ protected:
 	Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
 
 	Gtk::Menu m_Menu_Popup;
+
+
 };
 
 #endif /* SRC_STUDENTPAGE_H_ */

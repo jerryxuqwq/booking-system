@@ -17,7 +17,15 @@ Appointment::~Appointment()
 {
 	// TODO Auto-generated destructor stub
 }
-std::vector<appointment_data> Appointment::Update()
+
+int Appointment::add(int apm_room_id, int apm_user_id,
+                     Glib::ustring apm_reason, mysqlpp::sql_datetime apm_begin_date,
+                     mysqlpp::sql_datetime apm_end_date)
+{
+
+}
+
+std::vector<appointment_data> Appointment::Update(int user_id)
 {
 //	const char *db = "meetingsystem", *server = "127.0.0.1", *user = "library",
 //			*password = "jtO3ngAeISZKFH0O";
@@ -25,7 +33,7 @@ std::vector<appointment_data> Appointment::Update()
 	conn.set_option(new mysqlpp::SetCharsetNameOption("utf8"));
 	std::cout << conn.connect(db, server, user, password) << std::endl;
 	//appointment_data *data = new appointment_data[query.end];
-	mysqlpp::Query query = conn.query("SELECT * FROM `appointment`");
+	mysqlpp::Query query = conn.query("SELECT * FROM `appointment` WHERE apm_user_id="+std::to_string(user_id));
 	int temp = query.end+1;
 	std::vector<appointment_data> data;
 	appointment_data apm_data;

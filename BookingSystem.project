@@ -17,6 +17,7 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="include">
+    <File Name="include/Database.h"/>
     <File Name="include/Global.h"/>
     <File Name="include/Windows.h"/>
     <File Name="include/UserPage.h"/>

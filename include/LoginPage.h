@@ -34,6 +34,7 @@ protected:
 	Gtk::Entry m_Entry_Username, m_Entry_Password;
 	Gtk::Button m_Button_Login;
 	Gtk::Label m_Label_Password, m_Label_Username;
+	UserPage win;
 
 
 };

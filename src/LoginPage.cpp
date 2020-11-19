@@ -55,56 +55,36 @@ LoginPage::~LoginPage()
 void LoginPage::on_Buttom_Login_A()
 {
 
-//	int i= NewUser.CheakLogin();
-//
-//	if(i==1)
-//	{
-//		NewUser.Update();
-//		Gtk::MessageDialog dialog(*this, "Good");
-//		dialog.set_secondary_text("Welcome: "+NewUser.GetUserName());
-//		dialog.run();
-//		dialog.hide();
-//		hide();
-//		auto app = Gtk::Application::create();
-//		UserPage window;
-//		app->run(window);
-//	}
-//	if(i==0)
-//	{
-//		Gtk::MessageDialog dialog(*this, "Error");
-//		dialog.set_secondary_text(
-//				"Error, please check your user name or password");
-//		dialog.run();
-//	}
-//	if(i==-1)
-//	{
-//		Gtk::MessageDialog dialog(*this, "Error");
-//		dialog.set_secondary_text("Network Error");
-//		dialog.run();
-//	}
-	//sleep(1);
 
-//	LoginUser->SetUsername(m_Entry_Username.get_text());
-//	LoginUser->SetPassword(m_Entry_Password.get_text());
-//	std::cout << "Get box input" << m_Entry_Username.get_text() << " "
-//			<< m_Entry_Password.get_text();
-	User LoginUser;
-
-	if(LoginUser.Login(m_Entry_Username.get_text(),
-	                   m_Entry_Password.get_text()) == 1)
+	switch(LoginUser.Login(m_Entry_Username.get_text(),
+	                       m_Entry_Password.get_text()))
 	{
-		UserPage win;
-		auto app = Gtk::Application::create();
-		hide();
-		app->run(win);
-		
-	}
 
-	else
+	case 1:
+
+		//LoginUser.Update(LoginUserData.user_id);
+		LoginUser.Update();
+		//std::cout<<"username in LoginPage="<<LoginUser.GetUserName()<<std::endl;
+		win.Update();
+		win.show();
+		break;
+
+	case 0:
 	{
 		Gtk::MessageDialog dialog(*this, "Error");
 		dialog.set_secondary_text("Error");
 		dialog.run();
+		break;
+	}
+
+	case 2:
+	{
+		Gtk::MessageDialog dialog(*this, "Error");
+		dialog.set_secondary_text("No DataBase");
+		dialog.run();
+		break;
+	}
+
 	}
 
 

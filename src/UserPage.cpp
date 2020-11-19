@@ -14,7 +14,7 @@ UserPage::~UserPage()
 
 UserPage::UserPage() :
 	m_VBox(Gtk::ORIENTATION_VERTICAL), m_Button_Quit("Quit"), m_Label_Username(
-	    "test", true),m_Button_New("New")
+	    "test", true),m_Button_New("New"),m_Button_Refresh("Refresh")
 {
 	set_title("Meeting system GUI");
 	set_border_width(5);
@@ -32,14 +32,17 @@ UserPage::UserPage() :
 	m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
 
 	m_ButtonBox.pack_start(m_Label_Username);
-	m_Label_Username.set_text("欢迎 "+ LoginUserData.user_name);
+
 	m_ButtonBox.pack_start(m_Button_New);
+	m_ButtonBox.pack_start(m_Button_Refresh);
 	m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
 	m_ButtonBox.set_border_width(5);
 	m_ButtonBox.set_layout(Gtk::BUTTONBOX_END);
+
 	m_Button_Quit.signal_clicked().connect(
 	    sigc::mem_fun(*this, &UserPage::on_button_quit));
-
+	m_Button_Refresh.signal_clicked().connect(
+	    sigc::mem_fun(*this, &UserPage::on_button_refresh));
 	show_all_children();
 
 }
@@ -47,4 +50,19 @@ UserPage::UserPage() :
 void UserPage::on_button_quit()
 {
 	hide();
+}
+
+void UserPage::Update()
+{
+
+	m_Label_Username.set_text("欢迎 "+ LoginUser.GetUserName());
+	//std::cout<<"UserName in UserPage"<<LoginUser.GetUserName()<<std::endl;
+	m_TreeView.Update();
+}
+
+void UserPage::on_button_refresh()
+{
+	m_TreeView.Update();
+	//std::cout<<"refresh"<<std::endl;
+
 }

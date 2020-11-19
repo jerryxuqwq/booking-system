@@ -43,10 +43,10 @@ int User::Login(Glib::ustring Username, Glib::ustring Password)
 
 				if(row[2] == Username && row[3] == Password)
 				{
-					std::cout << row[0] << std::endl;
-
-					Update(row[0]);
-					LoginUserData.is_login = true;
+					//std::cout <<"Userid in User"<< row[0] << std::endl;
+					user_id=row[0];
+					Update();
+					is_login = true;
 
 					return 1;
 
@@ -56,7 +56,7 @@ int User::Login(Glib::ustring Username, Glib::ustring Password)
 				else if(it >= res.end())
 				{
 
-					LoginUserData.is_login = false;
+					is_login = false;
 					return 0;
 				}
 			}
@@ -67,11 +67,12 @@ int User::Login(Glib::ustring Username, Glib::ustring Password)
 	else
 	{
 		std::cout<<"cannot connect to the database"<<std::endl;
+		return 2;
 	}
 
 }
 
-int User::Update(int in_user_id)
+int User::Update()
 {
 
 	mysqlpp::Connection conn(false);
@@ -81,7 +82,8 @@ int User::Update(int in_user_id)
 
 		mysqlpp::Query query = conn.query(
 		                           "SELECT * FROM `user` WHERE `user_id`="
-		                           + std::to_string(in_user_id));
+		                           + std::to_string(user_id));
+		//std::cout<<"in_user_id in User"<<user_id<<std::endl;
 
 		if(mysqlpp::StoreQueryResult res = query.store())
 		{
@@ -91,15 +93,15 @@ int User::Update(int in_user_id)
 			for(it = res.begin(); it != res.end(); ++it)
 			{
 				mysqlpp::Row row = *it;
-				LoginUserData.user_name.assign(row[1]);
-				LoginUserData.user_loginname.assign(row[2]);
-				LoginUserData.user_password.assign(row[3]);
-				LoginUserData.user_email.assign(row[4]);
-				LoginUserData.user_level = row[5];
-				LoginUserData.user_status = row[6];
-//				std::cout << " " << row[0] << row[1] << row[2] << row[3]
-//				          << row[4] << row[5] << row[6] << std::endl;
-//				std::cout << LoginUserData.user_id << std::endl;
+				user_name.assign(row[1]);
+				user_loginname.assign(row[2]);
+				user_password.assign(row[3]);
+				user_email.assign(row[4]);
+				user_level = row[5];
+				user_status = row[6];
+				//std::cout << " " << row[0] << row[1] << row[2] << row[3]
+				//          << row[4] << row[5] << row[6] << std::endl;
+				//std::cout <<"user_id in User.Update"<< user_id << std::endl;
 			}
 
 		}

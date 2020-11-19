@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="CodeLite" Database="" Version="10000">
   <Project Name="BookingSystem" Path="BookingSystem.project" Active="Yes"/>
+  <Project Name="AssistantTest" Path="AssistantTest/AssistantTest.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
       <Project Name="BookingSystem" ConfigName="Debug"/>
+      <Project Name="AssistantTest" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
       <Project Name="BookingSystem" ConfigName="Release"/>
+      <Project Name="AssistantTest" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
