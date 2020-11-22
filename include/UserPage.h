@@ -22,6 +22,9 @@ public:
 protected:
 	//Signal handlers:
 	void on_button_quit();
+	void on_button_new();
+	
+	
 	void on_button_refresh();
 	
 	//Child widgets:

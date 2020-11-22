@@ -43,6 +43,8 @@ UserPage::UserPage() :
 	    sigc::mem_fun(*this, &UserPage::on_button_quit));
 	m_Button_Refresh.signal_clicked().connect(
 	    sigc::mem_fun(*this, &UserPage::on_button_refresh));
+	m_Button_New.signal_clicked().connect(
+	    sigc::mem_fun(*this, &UserPage::on_button_new));
 	show_all_children();
 
 }
@@ -54,7 +56,6 @@ void UserPage::on_button_quit()
 
 void UserPage::Update()
 {
-
 	m_Label_Username.set_text("欢迎 "+ LoginUser.GetUserName());
 	//std::cout<<"UserName in UserPage"<<LoginUser.GetUserName()<<std::endl;
 	m_TreeView.Update();
@@ -64,5 +65,11 @@ void UserPage::on_button_refresh()
 {
 	m_TreeView.Update();
 	//std::cout<<"refresh"<<std::endl;
+
+}
+
+void UserPage::on_button_new()
+{
+	std::cout<<"create new appointment"<<std::endl;
 
 }
