@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# CodeLite Tags File
+.codelite/CodeLite-jerry.tags
