@@ -31,10 +31,10 @@ std::vector<appointment_data> Appointment::Update(int user_id)
 //			*password = "jtO3ngAeISZKFH0O";
 	mysqlpp::Connection conn(false);
 	conn.set_option(new mysqlpp::SetCharsetNameOption("utf8"));
-	std::cout << conn.connect(db, server, user, password) << std::endl;
+	conn.connect(db, server, user, password);
 	//appointment_data *data = new appointment_data[query.end];
-	mysqlpp::Query query = conn.query("SELECT * FROM `appointment` WHERE apm_user_id="+std::to_string(user_id));
-	int temp = query.end+1;
+	mysqlpp::Query query =
+	    conn.query("SELECT * FROM `appointment` WHERE apm_user_id="+std::to_string(user_id));
 	std::vector<appointment_data> data;
 	appointment_data apm_data;
 
