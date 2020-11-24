@@ -10,6 +10,7 @@
 
 #include <gtkmm.h>
 #include <StudentPage.h>
+#include "NewApointmentPage.h"
 #include <User.h>
 
 class UserPage: public Gtk::Window
@@ -38,6 +39,7 @@ protected:
 	Gtk::Button m_Button_Quit;
 	Gtk::Button m_Button_New;
 	Gtk::Button m_Button_Refresh;
+	NewApointmentPage m_assistant_new;
 };
 
 #endif /* INCLUDE_USERPAGE_H_ */

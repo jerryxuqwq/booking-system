@@ -9,7 +9,7 @@
 #include "UserPage.h"
 #include "Rooms.h"
 #include "Global.h"
-
+#include <gtkmm/calendar.h>
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -22,8 +22,8 @@ int main(int argc, char *argv[])
 	LoginPage window;
 	return app->run(window);
 
-//Rooms room(1);
-//cout<<string(room.GetRoomDsp())<<endl;
+//	Rooms room;
+//	cout<<"get"<<string(room.GetRoom(1).room_name)<<endl;
 
 //	User NewUser;
 //	NewUser.window();

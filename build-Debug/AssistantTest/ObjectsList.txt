@@ -1,0 +1,1 @@
+../build-Debug/AssistantTest/main.cpp.o ../build-Debug/AssistantTest/exampleassistant.cpp.o ../build-Debug/AssistantTest/examplewindow.cpp.o

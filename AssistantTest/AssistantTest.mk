@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jerry
-Date                   :=11/17/20
+Date                   :=11/24/20
 CodeLitePath           :=/home/jerry/.codelite
 LinkerName             :=/usr/bin/g++-10
 SharedObjectLinkerName :=/usr/bin/g++-10 -shared -fPIC
@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/AssistantTest/exampleassistant.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/AssistantTest/main.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/AssistantTest/main.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/AssistantTest/exampleassistant.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(ObjectSuffix) 
 
 
 
@@ -91,13 +91,13 @@ PreBuild:
 ##
 ## Objects
 ##
-../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(ObjectSuffix): examplewindow.cpp ../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/AssistantTest/examplewindow.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/examplewindow.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(DependSuffix): examplewindow.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(DependSuffix) -MM examplewindow.cpp
+../build-$(ConfigurationName)/AssistantTest/main.cpp$(ObjectSuffix): main.cpp ../build-$(ConfigurationName)/AssistantTest/main.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/AssistantTest/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/AssistantTest/main.cpp$(DependSuffix): main.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/AssistantTest/main.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/AssistantTest/main.cpp$(DependSuffix) -MM main.cpp
 
-../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(PreprocessSuffix): examplewindow.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(PreprocessSuffix) examplewindow.cpp
+../build-$(ConfigurationName)/AssistantTest/main.cpp$(PreprocessSuffix): main.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/AssistantTest/main.cpp$(PreprocessSuffix) main.cpp
 
 ../build-$(ConfigurationName)/AssistantTest/exampleassistant.cpp$(ObjectSuffix): exampleassistant.cpp ../build-$(ConfigurationName)/AssistantTest/exampleassistant.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/AssistantTest/exampleassistant.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/exampleassistant.cpp$(ObjectSuffix) $(IncludePath)
@@ -107,13 +107,13 @@ PreBuild:
 ../build-$(ConfigurationName)/AssistantTest/exampleassistant.cpp$(PreprocessSuffix): exampleassistant.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/AssistantTest/exampleassistant.cpp$(PreprocessSuffix) exampleassistant.cpp
 
-../build-$(ConfigurationName)/AssistantTest/main.cpp$(ObjectSuffix): main.cpp ../build-$(ConfigurationName)/AssistantTest/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/AssistantTest/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/AssistantTest/main.cpp$(DependSuffix): main.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/AssistantTest/main.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/AssistantTest/main.cpp$(DependSuffix) -MM main.cpp
+../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(ObjectSuffix): examplewindow.cpp ../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/AssistantTest/examplewindow.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/examplewindow.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(DependSuffix): examplewindow.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(DependSuffix) -MM examplewindow.cpp
 
-../build-$(ConfigurationName)/AssistantTest/main.cpp$(PreprocessSuffix): main.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/AssistantTest/main.cpp$(PreprocessSuffix) main.cpp
+../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(PreprocessSuffix): examplewindow.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/AssistantTest/examplewindow.cpp$(PreprocessSuffix) examplewindow.cpp
 
 
 -include ../build-$(ConfigurationName)/AssistantTest//*$(DependSuffix)

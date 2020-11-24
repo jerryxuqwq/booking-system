@@ -70,6 +70,5 @@ void UserPage::on_button_refresh()
 
 void UserPage::on_button_new()
 {
-	std::cout<<"create new appointment"<<std::endl;
-
+	m_assistant_new.show();
 }

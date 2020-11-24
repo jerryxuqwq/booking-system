@@ -17,6 +17,7 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="include">
+    <File Name="include/NewApointmentPage.h"/>
     <File Name="include/Database.h"/>
     <File Name="include/Global.h"/>
     <File Name="include/Windows.h"/>
@@ -29,6 +30,7 @@
     <File Name="include/Appointment.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
+    <File Name="src/NewApointmentPage.cpp"/>
     <File Name="src/Global.cpp"/>
     <File Name="main.cpp"/>
     <File Name="src/Windows.cpp"/>
