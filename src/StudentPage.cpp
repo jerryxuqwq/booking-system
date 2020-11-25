@@ -110,9 +110,9 @@ void StudentPage::Update()
 
 	for(int i = 0; i < data.size(); i++)
 	{
-		Rooms room;
-		rooms_data room_data = room.GetRoom(data[i].apm_room_id);
-		
+
+		rooms_data room_data = room_list.GetRoom(data[i].apm_room_id);
+
 		std::string begin=data[i].apm_begin_date, end=data[i].apm_end_date;
 
 		row = *(m_refTreeModel->append());

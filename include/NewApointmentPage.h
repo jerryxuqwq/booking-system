@@ -3,6 +3,7 @@
 
 #include <gtkmm.h>
 #include "Rooms.h"
+#include "Global.h"
 
 class NewApointmentPage: public Gtk::Assistant
 {

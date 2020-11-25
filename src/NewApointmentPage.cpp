@@ -87,11 +87,15 @@ void NewApointmentPage::on_assistant_prepare(Gtk::Widget* /* widget */)
 
 void NewApointmentPage::PullRoomData()
 {
-	//Fill the TreeView's model
-	Gtk::TreeModel::Row row = *(m_refTreeModel->append());
-	row[m_Columns.m_col_room_id] = 1;
-	row[m_Columns.m_col_room_name] = "Billy Bob";
-	row[m_Columns.m_col_room_dsp] = "nnonono";
-	row[m_Columns.m_col_room_status] = 15;
+	std::vector<rooms_data> data = room_list.GetRoomlist();
 
+	//Fill the TreeView's model
+	for(int i=0; i< data.size(); i++)
+	{
+		Gtk::TreeModel::Row row = *(m_refTreeModel->append());
+		row[m_Columns.m_col_room_id] = data[i].room_id;
+		row[m_Columns.m_col_room_name] = data[i].room_name;
+		row[m_Columns.m_col_room_dsp] = data[i].room_dsp;
+		row[m_Columns.m_col_room_status] = data[i].room_status;
+	}
 }
