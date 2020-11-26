@@ -11,12 +11,12 @@ ExampleAssistant::ExampleAssistant()
 	set_border_width(12);
 	set_default_size(400, 300);
 
-	m_box.pack_start(m_label1);
+	//m_box.pack_start(m_label1);
 	//m_box.pack_start(m_entry);
-	m_box.pack_start(m_test);
+	//m_box.pack_start(m_test);
 
 
-	append_page(m_box);
+	append_page(m_entry);
 
 	append_page(m_check);
 
@@ -27,11 +27,12 @@ ExampleAssistant::ExampleAssistant()
 	set_page_title(*get_nth_page(2), "Confirmation");
 
 	set_page_complete(m_check, true);
+	set_page_complete(m_entry, true);
 	set_page_complete(m_label2, true);
 
-	set_page_type(m_box, Gtk::ASSISTANT_PAGE_INTRO);
+	set_page_type(m_entry, Gtk::ASSISTANT_PAGE_INTRO);
 	set_page_type(m_label2, Gtk::ASSISTANT_PAGE_CONFIRM);
-
+	
 	signal_apply().connect(
 	    sigc::mem_fun(*this,&ExampleAssistant::on_assistant_apply));
 	signal_cancel().connect(
@@ -87,11 +88,11 @@ void ExampleAssistant::on_assistant_prepare(Gtk::Widget* /* widget */)
 void ExampleAssistant::on_entry_changed()
 {
 	// The page is only complete if the entry contains text.
-	if(m_entry.get_text_length())
-		set_page_complete(m_box, true);
-
-	else
-		set_page_complete(m_box, false);
+//	if(m_entry.get_text_length())
+//		set_page_complete(m_box, true);
+//
+//	else
+//		set_page_complete(m_box, false);
 }
 
 void ExampleAssistant::print_status()

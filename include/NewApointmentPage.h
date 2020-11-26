@@ -19,23 +19,26 @@ protected:
 
 	// Member functions:
 	void print_status();
-	
+
 	void PullRoomData();
 
 	// Child widgets:
 	Gtk::Box m_box;
-	Gtk::Label m_label1, m_label2;
+	Gtk::Box m_box1;
+	Gtk::Label m_label1, m_label2, m_label3;
 	Gtk::CheckButton m_check;
 	Gtk::Entry m_entry;
 	Gtk::Calendar m_calendar;
 
 	Gtk::ScrolledWindow m_scrolledWindow;
+	Gtk::ScrolledWindow m_scrolledWindow_APM;
+	Glib::RefPtr<Gtk::TreeSelection> refSelection;
 
-	class ModelColumns : public Gtk::TreeModel::ColumnRecord
+	class ModelColumns_Rooms : public Gtk::TreeModel::ColumnRecord
 	{
 	public:
 
-		ModelColumns()
+		ModelColumns_Rooms()
 		{
 			add(m_col_room_id);
 			add(m_col_room_name);
@@ -49,11 +52,36 @@ protected:
 		Gtk::TreeModelColumn<int> m_col_room_status;
 	};
 
-	ModelColumns m_Columns;
+	ModelColumns_Rooms m_Columns_Rooms;
 
+
+	//for showing exsiting appointments
+	class ModelColumns_APM : public Gtk::TreeModel::ColumnRecord
+	{
+	public:
+
+		ModelColumns_APM()
+		{
+			add(m_col_apm_id);
+			add(m_col_room_name);
+			add(m_col_end_time);
+			add(m_col_begin_time);
+			add(m_col_approve_status);
+		}
+		Gtk::TreeModelColumn<unsigned int> m_col_apm_id;
+		Gtk::TreeModelColumn<Glib::ustring> m_col_room_name;
+		Gtk::TreeModelColumn<Glib::ustring> m_col_end_time;
+		Gtk::TreeModelColumn<Glib::ustring> m_col_begin_time;
+		Gtk::TreeModelColumn<Glib::ustring> m_col_approve_status;
+	};
+	ModelColumns_APM m_Columns_APM;
 	//Child widgets:
-	Gtk::TreeView m_TreeView;
-	Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
+	Gtk::TreeView m_TreeView_Rooms;
+	Gtk::TreeView m_TreeView_APM;
+	
+	Glib::RefPtr<Gtk::ListStore> m_refTreeModel_Rooms;
+
+
 
 };
 
