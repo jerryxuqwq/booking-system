@@ -14,8 +14,12 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+//	std::vector<appointment_data> data;
 //	Appointment test;
-//	test.Update();
+//	data = test.Update(1);
+//	for(int i=0;i<data.size();i++)
+//	cout<<data[i].apm_begin_time<< "   " <<data[i].apm_period<<endl;
+
 
 	auto app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
 	//User NewUser;
