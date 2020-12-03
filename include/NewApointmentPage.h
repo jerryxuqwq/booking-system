@@ -4,6 +4,10 @@
 #include <gtkmm.h>
 #include "Rooms.h"
 #include "Global.h"
+#include "Appointment.h"
+#include "mysql++.h"
+#include <time.h>
+
 
 class NewApointmentPage: public Gtk::Assistant
 {
@@ -16,6 +20,7 @@ protected:
 	void on_assistant_close();
 	void on_assistant_prepare(Gtk::Widget* widget);
 	void on_entry_changed();
+	void on_entry_changed_APM();
 
 	// Member functions:
 	void print_status();
@@ -32,19 +37,28 @@ protected:
 
 	Gtk::ScrolledWindow m_scrolledWindow;
 	Gtk::ScrolledWindow m_scrolledWindow_APM;
-	Glib::RefPtr<Gtk::TreeSelection> refSelection;
 
-	class ModelColumns_Rooms : public Gtk::TreeModel::ColumnRecord
+	class ModelColumns : public Gtk::TreeModel::ColumnRecord
 	{
 	public:
 
-		ModelColumns_Rooms()
+		ModelColumns()
 		{
 			add(m_col_room_id);
 			add(m_col_room_name);
 			add(m_col_room_dsp);
 			add(m_col_room_status);
+
+			add(m_col_period);
+			add(m_col_begin_time);
+			add(m_col_end_time);
+			add(m_col_approve_status);
 		}
+
+		Gtk::TreeModelColumn<int> m_col_period;
+		Gtk::TreeModelColumn<Glib::ustring> m_col_end_time;
+		Gtk::TreeModelColumn<Glib::ustring> m_col_begin_time;
+		Gtk::TreeModelColumn<Glib::ustring> m_col_approve_status;
 
 		Gtk::TreeModelColumn<unsigned int> m_col_room_id;
 		Gtk::TreeModelColumn<Glib::ustring> m_col_room_name;
@@ -52,34 +66,21 @@ protected:
 		Gtk::TreeModelColumn<int> m_col_room_status;
 	};
 
-	ModelColumns_Rooms m_Columns_Rooms;
-
-
-	//for showing exsiting appointments
-	class ModelColumns_APM : public Gtk::TreeModel::ColumnRecord
-	{
-	public:
-
-		ModelColumns_APM()
-		{
-			add(m_col_apm_id);
-			add(m_col_room_name);
-			add(m_col_end_time);
-			add(m_col_begin_time);
-			add(m_col_approve_status);
-		}
-		Gtk::TreeModelColumn<unsigned int> m_col_apm_id;
-		Gtk::TreeModelColumn<Glib::ustring> m_col_room_name;
-		Gtk::TreeModelColumn<Glib::ustring> m_col_end_time;
-		Gtk::TreeModelColumn<Glib::ustring> m_col_begin_time;
-		Gtk::TreeModelColumn<Glib::ustring> m_col_approve_status;
-	};
-	ModelColumns_APM m_Columns_APM;
-	//Child widgets:
+	ModelColumns m_Columns;
 	Gtk::TreeView m_TreeView_Rooms;
-	Gtk::TreeView m_TreeView_APM;
-	
 	Glib::RefPtr<Gtk::ListStore> m_refTreeModel_Rooms;
+	Glib::RefPtr<Gtk::TreeSelection> refSelection;
+
+	Gtk::TreeView m_TreeView_APM;
+	Glib::RefPtr<Gtk::ListStore> m_refTreeModel_APM;
+	Glib::RefPtr<Gtk::TreeSelection> refSelection_APM;
+
+	//Child widgets:
+private:
+	int C_room,C_period;
+	Glib::ustring text;
+	Glib::ustring C_reason;
+	Appointment NewAppointment;
 
 
 

@@ -26,19 +26,23 @@ struct appointment_data
 class Appointment
 {
 public:
-	std::vector<appointment_data> Update(int user_id);
-	std::vector<appointment_data> Update();
+	std::vector<appointment_data> UserUpdate(int user_id);
+	std::vector<appointment_data> DateUpdate(mysqlpp::sql_date apm_begin_date);
 
 
 	Appointment();
 	int add(int apm_room_id, int apm_user_id,
-	        Glib::ustring apm_reason, mysqlpp::sql_datetime apm_begin_date,
-	        mysqlpp::sql_datetime apm_end_date);
+	        Glib::ustring apm_reason, mysqlpp::sql_datetime apm_begin_date);
 	virtual ~Appointment();
 
+	int ConvertToPeriod(mysqlpp::sql_time apm_begin_time);
+	mysqlpp::Time ConvertToBeginTime(int period);
+	mysqlpp::Time ConvertToEndTime(int period);
+
+
+
 private:
-	int ConvertToPeriod(mysqlpp::sql_time apm_begin_time,
-	                    mysqlpp::sql_time apm_end_time);
+
 
 
 };

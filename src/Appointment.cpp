@@ -19,13 +19,32 @@ Appointment::~Appointment()
 }
 
 int Appointment::add(int apm_room_id, int apm_user_id,
-                     Glib::ustring apm_reason, mysqlpp::sql_datetime apm_begin_date,
-                     mysqlpp::sql_datetime apm_end_date)
+                     Glib::ustring apm_reason, mysqlpp::sql_datetime apm_begin_date)
 {
+	mysqlpp::sql_date date(apm_begin_date);
+	mysqlpp::sql_time time(apm_begin_date);
 
+	mysqlpp::Connection conn(false);
+	conn.set_option(new mysqlpp::SetCharsetNameOption("utf8"));
+	conn.connect(db, server, user, password);
+	// Form the query to insert the row into the stock table.
+	mysqlpp::Query query = conn.query();
+	query << "INSERT INTO `appointment`"<<
+	      "(`apm_room_id`,`apm_user_id`,`apm_reason`,`apm_begin_date`,`apm_begin_time`)"
+	      <<"VALUES("+
+	      std::to_string(apm_room_id)+","+std::to_string(apm_user_id)+
+	      ",\"test\",'"+date.str()+"','"+time.str()+
+	      "')";
+	//std::cout<<query<<std::endl;
+	query.execute();
+
+
+
+
+	return 1;
 }
 
-std::vector<appointment_data> Appointment::Update(int user_id)
+std::vector<appointment_data> Appointment::UserUpdate(int user_id)
 {
 //	const char *db = "meetingsystem", *server = "127.0.0.1", *user = "library",
 //			*password = "jtO3ngAeISZKFH0O";
@@ -59,10 +78,10 @@ std::vector<appointment_data> Appointment::Update(int user_id)
 			apm_data.apm_end_time = row[6];
 			apm_data.apm_approve_status = row[7];
 			apm_data.apm_reason.assign((row[8]));
-			apm_data.apm_period=ConvertToPeriod(row[4],row[6]);
+			apm_data.apm_period=ConvertToPeriod(row[4]);
 			data.push_back(apm_data);
-			std::cout << " " << row[0] << row[1] << row[2]<<row[3] << row[4] << row[5]
-			          << row[6] << std::endl;
+//			std::cout << " " << row[0] << row[1] << row[2]<<row[3] << row[4] << row[5]
+//			          << row[6] << std::endl;
 //			std::string test = apm_data.apm_reason.assign((row[6]));
 //			std::cout << "in apm_data  " << apm_data.apm_id << "  "
 //					<< apm_data.apm_room_id << "  " << apm_data.apm_user_id
@@ -76,22 +95,24 @@ std::vector<appointment_data> Appointment::Update(int user_id)
 	return data;
 }
 
-std::vector<appointment_data> Appointment::Update()
+std::vector<appointment_data> Appointment::DateUpdate(mysqlpp::sql_date
+        apm_begin_date)
 {
 //	const char *db = "meetingsystem", *server = "127.0.0.1", *user = "library",
 //			*password = "jtO3ngAeISZKFH0O";
 	mysqlpp::Connection conn(false);
 	conn.set_option(new mysqlpp::SetCharsetNameOption("utf8"));
 	conn.connect(db, server, user, password);
-	//appointment_data *data = new appointment_data[query.end];
+
 	mysqlpp::Query query =
-	    conn.query("SELECT * FROM `appointment`");
+	    conn.query("SELECT * FROM `appointment` WHERE `apm_begin_date` ='"+
+	               apm_begin_date.str()+"'");
 	std::vector<appointment_data> data;
 	appointment_data apm_data;
 
 	if(mysqlpp::StoreQueryResult res = query.store())
 	{
-	
+
 		mysqlpp::StoreQueryResult::const_iterator it;
 
 		for(it = res.begin(); it != res.end(); ++it)
@@ -108,10 +129,10 @@ std::vector<appointment_data> Appointment::Update()
 			apm_data.apm_end_time = row[6];
 			apm_data.apm_approve_status = row[7];
 			apm_data.apm_reason.assign((row[8]));
-			apm_data.apm_period=ConvertToPeriod(row[4],row[6]);
+			apm_data.apm_period=ConvertToPeriod(row[4]);
 			data.push_back(apm_data);
 //			std::cout << " " << row[0] << row[1] << row[2]<<row[3] << row[4] << row[5]
-//					<< row[6] << std::endl;
+//			          << row[6] << std::endl;
 //			std::string test = apm_data.apm_reason.assign((row[6]));
 //			std::cout << "in apm_data  " << apm_data.apm_id << "  "
 //					<< apm_data.apm_room_id << "  " << apm_data.apm_user_id
@@ -125,13 +146,12 @@ std::vector<appointment_data> Appointment::Update()
 	return data;
 }
 
-int Appointment::ConvertToPeriod(mysqlpp::sql_time apm_begin_time,
-                                 mysqlpp::sql_time apm_end_time)
+int Appointment::ConvertToPeriod(mysqlpp::sql_time apm_begin_time)
 {
 
 	int hour = apm_begin_time.hour(), minute = apm_begin_time.minute();
 
-	std::cout<<"hour"<<hour<<" "<<minute <<std::endl;
+	//std::cout<<"hour"<<hour<<" "<<minute <<std::endl;
 
 	if(hour == 7 && minute == 30) return 1;
 
@@ -158,4 +178,81 @@ int Appointment::ConvertToPeriod(mysqlpp::sql_time apm_begin_time,
 	else if(hour == 21 && minute == 30) return 12;
 
 	else return -1;
+}
+
+mysqlpp::Time Appointment::ConvertToBeginTime(int period)
+{
+	mysqlpp::Time time;
+
+	switch(period)
+	{
+
+	case 1:
+		time.hour(7);
+		time.minute(30);
+		break;
+
+	case 2:
+		time.hour(8);
+		time.minute(25);
+		break;
+
+	case 3:
+		time.hour(9);
+		time.minute(20);
+		break;
+
+	case 4:
+		time.hour(10);
+		time.minute(20);
+		break;
+
+	case 5:
+		time.hour(11);
+		time.minute(15);
+		break;
+
+	case 6:
+		time.hour(13);
+		time.minute(30);
+		break;
+
+	case 7:
+		time.hour(14);
+		time.minute(30);
+		break;
+
+	case 8:
+		time.hour(15);
+		time.minute(25);
+		break;
+
+	case 9:
+		time.hour(16);
+		time.minute(20);
+		break;
+
+	case 10:
+		time.hour(18);
+		time.minute(30);
+		break;
+
+	case 11:
+		time.hour(20);
+		time.minute(0);
+		break;
+
+	case 12:
+		time.hour(21);
+		time.minute(12);
+		break;
+
+	}
+
+	return time;
+}
+mysqlpp::Time Appointment::ConvertToEndTime(int period)
+{
+	mysqlpp::Time time;
+	return time;
 }

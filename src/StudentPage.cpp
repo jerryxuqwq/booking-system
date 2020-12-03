@@ -23,8 +23,8 @@ StudentPage::StudentPage()
 //Add the TreeView's view columns:
 	append_column("APID", m_Columns.m_col_apm_id);
 	append_column("ROOM", m_Columns.m_col_room_name);
-	append_column("BEGIN_DATA", m_Columns.m_col_begin_time);
-	append_column("END_DATA", m_Columns.m_col_end_time);
+	append_column("BEGIN DATA", m_Columns.m_col_begin_date);
+	append_column("BEGIN TIME", m_Columns.m_col_begin_time);
 	append_column("REASON",m_Columns.m_col_reason);
 	append_column("APPROVE",m_Columns.m_col_approve_status);
 
@@ -96,7 +96,7 @@ void StudentPage::Update()
 	std::vector<appointment_data> data;
 	Appointment apm_data;
 
-	data = apm_data.Update(LoginUser.GetUserId());
+	data = apm_data.UserUpdate(LoginUser.GetUserId());
 	//std::cout<<"UserID in StudentPage"<<LoginUser.GetUserId()<<std::endl;
 
 
@@ -113,19 +113,19 @@ void StudentPage::Update()
 
 		rooms_data room_data = room_list.GetRoom(data[i].apm_room_id);
 
-		std::string begin=data[i].apm_begin_date, end=data[i].apm_end_date;
+		std::string Bdate=data[i].apm_begin_date, Btime=data[i].apm_begin_time;
 
 		row = *(m_refTreeModel->append());
 		row[m_Columns.m_col_apm_id] = data[i].apm_id;
 		row[m_Columns.m_col_room_name] = room_data.room_name;
-		row[m_Columns.m_col_begin_time] = begin;
-		row[m_Columns.m_col_end_time] = end;
+		row[m_Columns.m_col_begin_date] = Bdate;
+		row[m_Columns.m_col_begin_time] = Btime;
 		row[m_Columns.m_col_reason] = data[i].apm_reason;
 
 		switch(data[i].apm_approve_status)
 		{
 		case 1:
-			row[m_Columns.m_col_approve_status] = "Yes";
+			row[m_Columns.m_col_approve_status] = "Approved";
 			break;
 
 		case 0:
