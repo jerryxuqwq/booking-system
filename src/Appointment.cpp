@@ -107,6 +107,7 @@ std::vector<appointment_data> Appointment::DateUpdate(mysqlpp::sql_date
 	mysqlpp::Query query =
 	    conn.query("SELECT * FROM `appointment` WHERE `apm_begin_date` ='"+
 	               apm_begin_date.str()+"'");
+				std::cout<<query<<std::endl;
 	std::vector<appointment_data> data;
 	appointment_data apm_data;
 

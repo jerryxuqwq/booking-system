@@ -56,6 +56,7 @@ NewApointmentPage::NewApointmentPage():
 	PullRoomData();
 
 	m_box.pack_start(m_calendar);
+	m_calendar.select_day(20);
 	m_box.pack_start(m_scrolledWindow);
 
 	append_page(m_box);
@@ -83,10 +84,12 @@ NewApointmentPage::NewApointmentPage():
 	    sigc::mem_fun(*this,&NewApointmentPage::on_assistant_close));
 	signal_prepare().connect(
 	    sigc::mem_fun(*this,&NewApointmentPage::on_assistant_prepare));
+
 	refSelection->signal_changed().connect(
 	    sigc::mem_fun(*this,&NewApointmentPage::on_entry_changed));
 	refSelection_APM->signal_changed().connect(
 	    sigc::mem_fun(*this,&NewApointmentPage::on_entry_changed_APM));
+
 
 	show_all_children();
 }
@@ -108,7 +111,6 @@ void NewApointmentPage::on_assistant_apply()
 	datetime.year(1900+info->tm_year);
 	datetime.month(info->tm_mon+1);
 	datetime.day(info->tm_mday);
-
 
 	NewAppointment.add(C_room,
 	                   LoginUser.GetUserId(),
@@ -151,16 +153,6 @@ void NewApointmentPage::PullRoomData()
 		row[m_Columns.m_col_room_status] = rooms[i].room_status;
 	}
 
-
-
-	time_t rawtime;
-	std::tm *info;
-	time(&rawtime);
-	info = localtime(&rawtime);
-	mysqlpp::Date date;
-	date.year(1900+info->tm_year);
-	date.month(info->tm_mon+1);
-	date.day(info->tm_mday);
 }
 
 
@@ -170,13 +162,16 @@ void NewApointmentPage::on_entry_changed()
 
 
 	Glib::Date date;
+	unsigned int year, month, day;
 
-	m_calendar.get_date(date);
 
 	//std::cout<<<<std::endl;
 	if(refSelection)
 	{
-		
+
+		m_calendar.get_date(year, month, day);
+		month++;
+		std::cout<<"choose1:"<<year<<" "<<month<<" "<<day<<std::endl;
 		Gtk::TreeModel::iterator iter = refSelection->get_selected();
 
 		if(iter)
@@ -185,18 +180,18 @@ void NewApointmentPage::on_entry_changed()
 			text="You will book "+
 			     (*iter)[m_Columns.m_col_room_name]+
 			     " at "
-			     +std::to_string(date.get_day())+ "/"
-			     +std::to_string(date.get_month())+ "/"
-			     +std::to_string(date.get_year())+" ";
+			     +std::to_string(day)+ "/"
+			     +std::to_string(month)+ "/"
+			     +std::to_string(year)+" ";
 		}
 
 		set_page_complete(m_box, true);
 		set_page_complete(m_label2, true);
-		
+
 		mysqlpp::sql_date Sdate;
-		Sdate.month(date.get_month());
-		Sdate.year(date.get_year());
-		Sdate.day(date.get_day());
+		Sdate.month(month);
+		Sdate.year(year);
+		Sdate.day(day);
 		
 		std::vector<appointment_data> apms = NewAppointment.DateUpdate(Sdate);
 		std::vector<int> period;
@@ -204,7 +199,7 @@ void NewApointmentPage::on_entry_changed()
 
 		for(int i=0; i<apms.size(); i++)
 		{
-			std::cout<<NewAppointment.ConvertToPeriod(apms[i].apm_begin_time)<<std::endl;
+			//std::cout<<NewAppointment.ConvertToPeriod(apms[i].apm_begin_time)<<std::endl;
 
 			for(int j=1; j<=11; j++)
 			{
@@ -213,31 +208,43 @@ void NewApointmentPage::on_entry_changed()
 					period.push_back(j);
 				}
 			}
+			std::cout<<i<<"apms"<<apms[i].apm_id<<std::endl;
 		}
 
-		for(int j=1; j<=11; j++)
+		for(int i=0; i<period.size(); i++)
 		{
-			for(int i=0; i<period.size(); i++)
-			{
-				if(j!=period[i])
-				{
-					std::cout<<"test"<<period[i]<<std::endl;
-					Gtk::TreeModel::Row row = *(m_refTreeModel_APM->append());
-
-					row[m_Columns.m_col_period] = j;
-
-					row[m_Columns.m_col_begin_time] =
-					    std::to_string(NewAppointment.ConvertToBeginTime(j).hour())
-					    +":"
-					    +std::to_string(NewAppointment.ConvertToBeginTime(j).minute());
-					//row[m_Columns.m_col_begin_time] = std::to_string(apms[j].apm_begin_time);
-
-					row[m_Columns.m_col_approve_status] = "Empty";
-
-
-				}
-			}
+			std::cout<<period[i]<<std::endl;
 		}
+
+
+
+//		int i=0;
+//
+//		for(int j=1; j<=11; j++)
+//		{
+//
+//			if(j==period[i])
+//			{
+//				i++;
+//			}
+//
+//			else
+//			{
+//				std::cout<<"test"<<period[i]<<std::endl;
+//				Gtk::TreeModel::Row row = *(m_refTreeModel_APM->append());
+//
+//				row[m_Columns.m_col_period] = j;
+//
+//				row[m_Columns.m_col_begin_time] =
+//				    std::to_string(NewAppointment.ConvertToBeginTime(j).hour())
+//				    +":"
+//				    +std::to_string(NewAppointment.ConvertToBeginTime(j).minute());
+//				//row[m_Columns.m_col_begin_time] = std::to_string(apms[j].apm_begin_time);
+//
+//				row[m_Columns.m_col_approve_status] = "Empty";
+//			}
+//
+//		}
 	}
 }
 
