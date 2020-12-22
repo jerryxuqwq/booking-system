@@ -56,7 +56,7 @@ NewApointmentPage::NewApointmentPage():
 	PullRoomData();
 
 	m_box.pack_start(m_calendar);
-	m_calendar.select_day(20);
+	//m_calendar.select_day(20);
 	m_box.pack_start(m_scrolledWindow);
 
 	append_page(m_box);
@@ -68,8 +68,12 @@ NewApointmentPage::NewApointmentPage():
 	append_page(m_box1);
 	set_page_title(*get_nth_page(1), "Select Time");
 
+	append_page(m_TextView);
+	set_page_complete(m_TextView, true);
+	set_page_title(*get_nth_page(2), "Reason");
+
 	append_page(m_label2);
-	set_page_title(*get_nth_page(2), "Confirmation");
+	set_page_title(*get_nth_page(3), "Confirmation");
 
 
 
@@ -89,7 +93,6 @@ NewApointmentPage::NewApointmentPage():
 	    sigc::mem_fun(*this,&NewApointmentPage::on_entry_changed));
 	refSelection_APM->signal_changed().connect(
 	    sigc::mem_fun(*this,&NewApointmentPage::on_entry_changed_APM));
-
 
 	show_all_children();
 }
@@ -111,10 +114,11 @@ void NewApointmentPage::on_assistant_apply()
 	datetime.year(1900+info->tm_year);
 	datetime.month(info->tm_mon+1);
 	datetime.day(info->tm_mday);
+	Glib::RefPtr<Gtk::TextBuffer> buffer =  m_TextView.get_buffer();
 
 	NewAppointment.add(C_room,
 	                   LoginUser.GetUserId(),
-	                   " test",
+	                   buffer->get_text(),
 	                   datetime
 	                  );
 }
@@ -136,9 +140,54 @@ void NewApointmentPage::on_assistant_prepare(Gtk::Widget* /* widget */)
 	                                 get_current_page() + 1, get_n_pages()));
 
 
+	if(get_current_page()==1)
+	{
+		PullAPMData();
+	}
+
+
 
 }
+void NewApointmentPage::PullAPMData()
+{
 
+
+	std::vector<appointment_data> apms = NewAppointment.DateUpdate(Sdate);
+
+	std::vector<int> exist_period;
+	std::vector<int> avaliavle_period;
+
+	m_refTreeModel_APM->clear();
+
+	for(int i=0; i<apms.size(); i++)
+	{
+		std::cout<<NewAppointment.ConvertToPeriod(apms[i].apm_begin_time)<<std::endl;
+		exist_period.push_back(NewAppointment.ConvertToPeriod(apms[i].apm_begin_time));
+	}
+
+	for(int i=1; i<=11; i++)
+	{
+		avaliavle_period.push_back(i);
+
+		for(int j=0; j<exist_period.size(); j++)
+		{
+			if(i==exist_period[j])
+			{
+				avaliavle_period.pop_back();
+			}
+		}
+	}
+
+	for(int i=0; i<avaliavle_period.size(); i++)
+	{
+		Gtk::TreeModel::Row row = *(m_refTreeModel_APM->append());
+		row[m_Columns.m_col_period] = avaliavle_period[i];
+		row[m_Columns.m_col_begin_time] = NewAppointment.ConvertToBeginTime(
+		                                      avaliavle_period[i]).str();
+		row[m_Columns.m_col_approve_status] = "Empty";
+	}
+
+}
 void NewApointmentPage::PullRoomData()
 {
 	std::vector<rooms_data> rooms = room_list.GetRoomlist();
@@ -160,10 +209,8 @@ void NewApointmentPage::PullRoomData()
 void NewApointmentPage::on_entry_changed()
 {
 
-
 	Glib::Date date;
 	unsigned int year, month, day;
-
 
 	//std::cout<<<<std::endl;
 	if(refSelection)
@@ -171,7 +218,10 @@ void NewApointmentPage::on_entry_changed()
 
 		m_calendar.get_date(year, month, day);
 		month++;
-		std::cout<<"choose1:"<<year<<" "<<month<<" "<<day<<std::endl;
+		//std::cout<<"choose1:"<<year<<" "<<month<<" "<<day<<std::endl;
+		Sdate.month(month);
+		Sdate.year(year);
+		Sdate.day(day);
 		Gtk::TreeModel::iterator iter = refSelection->get_selected();
 
 		if(iter)
@@ -188,63 +238,6 @@ void NewApointmentPage::on_entry_changed()
 		set_page_complete(m_box, true);
 		set_page_complete(m_label2, true);
 
-		mysqlpp::sql_date Sdate;
-		Sdate.month(month);
-		Sdate.year(year);
-		Sdate.day(day);
-		
-		std::vector<appointment_data> apms = NewAppointment.DateUpdate(Sdate);
-		std::vector<int> period;
-
-
-		for(int i=0; i<apms.size(); i++)
-		{
-			//std::cout<<NewAppointment.ConvertToPeriod(apms[i].apm_begin_time)<<std::endl;
-
-			for(int j=1; j<=11; j++)
-			{
-				if(NewAppointment.ConvertToPeriod(apms[i].apm_begin_time)==j)
-				{
-					period.push_back(j);
-				}
-			}
-			std::cout<<i<<"apms"<<apms[i].apm_id<<std::endl;
-		}
-
-		for(int i=0; i<period.size(); i++)
-		{
-			std::cout<<period[i]<<std::endl;
-		}
-
-
-
-//		int i=0;
-//
-//		for(int j=1; j<=11; j++)
-//		{
-//
-//			if(j==period[i])
-//			{
-//				i++;
-//			}
-//
-//			else
-//			{
-//				std::cout<<"test"<<period[i]<<std::endl;
-//				Gtk::TreeModel::Row row = *(m_refTreeModel_APM->append());
-//
-//				row[m_Columns.m_col_period] = j;
-//
-//				row[m_Columns.m_col_begin_time] =
-//				    std::to_string(NewAppointment.ConvertToBeginTime(j).hour())
-//				    +":"
-//				    +std::to_string(NewAppointment.ConvertToBeginTime(j).minute());
-//				//row[m_Columns.m_col_begin_time] = std::to_string(apms[j].apm_begin_time);
-//
-//				row[m_Columns.m_col_approve_status] = "Empty";
-//			}
-//
-//		}
 	}
 }
 

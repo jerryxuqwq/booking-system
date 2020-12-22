@@ -33,7 +33,7 @@ int Appointment::add(int apm_room_id, int apm_user_id,
 	      "(`apm_room_id`,`apm_user_id`,`apm_reason`,`apm_begin_date`,`apm_begin_time`)"
 	      <<"VALUES("+
 	      std::to_string(apm_room_id)+","+std::to_string(apm_user_id)+
-	      ",\"test\",'"+date.str()+"','"+time.str()+
+	      ",\""+apm_reason+"\",'"+date.str()+"','"+time.str()+
 	      "')";
 	//std::cout<<query<<std::endl;
 	query.execute();

@@ -26,7 +26,8 @@ protected:
 	void print_status();
 
 	void PullRoomData();
-
+	void PullAPMData();
+	Gtk::TextView m_TextView;
 	// Child widgets:
 	Gtk::Box m_box;
 	Gtk::Box m_box1;
@@ -81,7 +82,7 @@ private:
 	Glib::ustring text;
 	Glib::ustring C_reason;
 	Appointment NewAppointment;
-
+	mysqlpp::sql_date Sdate;
 
 
 };
