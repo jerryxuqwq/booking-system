@@ -1,1 +1,0 @@
-./build-Debug//src_Appointment.cpp.o ./build-Debug//src_UserPage.cpp.o ./build-Debug//main.cpp.o ./build-Debug//src_Windows.cpp.o ./build-Debug//src_LoginPage.cpp.o ./build-Debug//src_User.cpp.o ./build-Debug//src_Global.cpp.o ./build-Debug//src_Report.cpp.o ./build-Debug//src_StudentPage.cpp.o ./build-Debug//src_Rooms.cpp.o ./build-Debug//src_NewApointmentPage.cpp.o
