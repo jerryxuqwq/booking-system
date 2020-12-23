@@ -28,6 +28,8 @@ class Appointment
 public:
 	std::vector<appointment_data> UserUpdate(int user_id);
 	std::vector<appointment_data> DateUpdate(mysqlpp::sql_date apm_begin_date);
+	std::vector<appointment_data> DateUpdate(int apm_room_id,mysqlpp::sql_date apm_begin_date);
+	int del(int apm_id);
 
 
 	Appointment();

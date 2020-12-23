@@ -33,7 +33,7 @@ UserPage::UserPage() :
 
 	m_ButtonBox.pack_start(m_Label_Username);
 
-	m_ButtonBox.pack_start(m_Button_New);
+	//m_ButtonBox.pack_start(m_Button_New);
 	m_ButtonBox.pack_start(m_Button_Refresh);
 	m_ButtonBox.pack_start(m_Button_Quit, Gtk::PACK_SHRINK);
 	m_ButtonBox.set_border_width(5);
@@ -43,8 +43,8 @@ UserPage::UserPage() :
 	    sigc::mem_fun(*this, &UserPage::on_button_quit));
 	m_Button_Refresh.signal_clicked().connect(
 	    sigc::mem_fun(*this, &UserPage::on_button_refresh));
-	m_Button_New.signal_clicked().connect(
-	    sigc::mem_fun(*this, &UserPage::on_button_new));
+//	m_Button_New.signal_clicked().connect(
+//	    sigc::mem_fun(*this, &UserPage::on_button_new));
 	show_all_children();
 
 }
@@ -66,9 +66,4 @@ void UserPage::on_button_refresh()
 	m_TreeView.Update();
 	//std::cout<<"refresh"<<std::endl;
 
-}
-
-void UserPage::on_button_new()
-{
-	m_assistant_new.show();
 }

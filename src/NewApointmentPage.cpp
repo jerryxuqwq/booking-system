@@ -152,8 +152,8 @@ void NewApointmentPage::PullAPMData()
 {
 
 
-	std::vector<appointment_data> apms = NewAppointment.DateUpdate(Sdate);
-
+	std::vector<appointment_data> apms = NewAppointment.DateUpdate(C_room,Sdate);
+	
 	std::vector<int> exist_period;
 	std::vector<int> avaliavle_period;
 
@@ -252,8 +252,6 @@ void NewApointmentPage::on_entry_changed_APM()
 		{
 			C_period = (*iter)[m_Columns.m_col_period];
 			m_label2.set_text(text+(*iter)[m_Columns.m_col_begin_time]);
-
-
 		}
 
 		set_page_complete(m_box1, true);

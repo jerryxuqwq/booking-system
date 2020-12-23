@@ -1,24 +1,25 @@
 /*
- * StudentPage.h
+ * DataPage.h
  *
  *  Created on: Oct 19, 2020
  *      Author: jerry
  */
 
-#ifndef SRC_STUDENTPAGE_H_
-#define SRC_STUDENTPAGE_H_
+#ifndef SRC_DataPage_H_
+#define SRC_DataPage_H_
 
 #include <gtkmm.h>
 #include <ctime>
+#include "NewApointmentPage.h"
 #include <Appointment.h>
 #include "Rooms.h"
 #include "Global.h"
 
-class StudentPage: public Gtk::TreeView
+class DataPage: public Gtk::TreeView
 {
 public:
-	StudentPage();
-	virtual ~StudentPage();
+	DataPage();
+	virtual ~DataPage();
 	void Update();
 
 
@@ -30,6 +31,8 @@ protected:
 
 	//Signal handler for popup menu items:
 	void on_menu_file_popup_generic();
+	void on_menu_file_popup_delete();
+	void on_menu_file_popup_new();
 
 	//Tree model columns:
 	class ModelColumns: public Gtk::TreeModel::ColumnRecord
@@ -61,8 +64,11 @@ protected:
 	Glib::RefPtr<Gtk::ListStore> m_refTreeModel;
 
 	Gtk::Menu m_Menu_Popup;
+	NewApointmentPage m_assistant_new;
+	
+	Appointment DelAppointment;
 
 
 };
 
-#endif /* SRC_STUDENTPAGE_H_ */
+#endif /* SRC_DataPage_H_ */

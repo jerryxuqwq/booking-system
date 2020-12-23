@@ -9,8 +9,7 @@
 #define INCLUDE_USERPAGE_H_
 
 #include <gtkmm.h>
-#include <StudentPage.h>
-#include "NewApointmentPage.h"
+#include <DataPage.h>
 #include <User.h>
 
 class UserPage: public Gtk::Window
@@ -23,7 +22,7 @@ public:
 protected:
 	//Signal handlers:
 	void on_button_quit();
-	void on_button_new();
+//	void on_button_new();
 	
 	
 	void on_button_refresh();
@@ -33,13 +32,13 @@ protected:
 
 	Gtk::ScrolledWindow m_ScrolledWindow;
 	Gtk::Label m_Label_Username;
-	StudentPage m_TreeView;
+	DataPage m_TreeView;
 
 	Gtk::ButtonBox m_ButtonBox;
 	Gtk::Button m_Button_Quit;
 	Gtk::Button m_Button_New;
 	Gtk::Button m_Button_Refresh;
-	NewApointmentPage m_assistant_new;
+	
 };
 
 #endif /* INCLUDE_USERPAGE_H_ */
