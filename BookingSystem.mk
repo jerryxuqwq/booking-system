@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jerry
-Date                   :=12/23/20
+Date                   :=12/24/20
 CodeLitePath           :=/home/jerry/.codelite
 LinkerName             :=/usr/bin/g++-10
 SharedObjectLinkerName :=/usr/bin/g++-10 -shared -fPIC
@@ -60,8 +60,8 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=./build-$(ConfigurationName)//src_DataPage.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_Appointment.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_UserPage.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//main.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_Windows.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_LoginPage.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_User.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_Global.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_Report.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_Rooms.cpp$(ObjectSuffix) \
-	./build-$(ConfigurationName)//src_NewApointmentPage.cpp$(ObjectSuffix) 
+Objects0=./build-$(ConfigurationName)//src_Appointment.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_User.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_Global.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//main.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_LoginPage.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_StudentPage.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_Report.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_ApprovalPage.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_Windows.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_UserPage.cpp$(ObjectSuffix) \
+	./build-$(ConfigurationName)//src_DataPage.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_Rooms.cpp$(ObjectSuffix) ./build-$(ConfigurationName)//src_NewApointmentPage.cpp$(ObjectSuffix) 
 
 
 
@@ -92,14 +92,6 @@ PreBuild:
 ##
 ## Objects
 ##
-./build-$(ConfigurationName)//src_DataPage.cpp$(ObjectSuffix): src/DataPage.cpp ./build-$(ConfigurationName)//src_DataPage.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/DataPage.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_DataPage.cpp$(ObjectSuffix) $(IncludePath)
-./build-$(ConfigurationName)//src_DataPage.cpp$(DependSuffix): src/DataPage.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT./build-$(ConfigurationName)//src_DataPage.cpp$(ObjectSuffix) -MF./build-$(ConfigurationName)//src_DataPage.cpp$(DependSuffix) -MM src/DataPage.cpp
-
-./build-$(ConfigurationName)//src_DataPage.cpp$(PreprocessSuffix): src/DataPage.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_DataPage.cpp$(PreprocessSuffix) src/DataPage.cpp
-
 ./build-$(ConfigurationName)//src_Appointment.cpp$(ObjectSuffix): src/Appointment.cpp ./build-$(ConfigurationName)//src_Appointment.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/Appointment.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_Appointment.cpp$(ObjectSuffix) $(IncludePath)
 ./build-$(ConfigurationName)//src_Appointment.cpp$(DependSuffix): src/Appointment.cpp
@@ -107,38 +99,6 @@ PreBuild:
 
 ./build-$(ConfigurationName)//src_Appointment.cpp$(PreprocessSuffix): src/Appointment.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_Appointment.cpp$(PreprocessSuffix) src/Appointment.cpp
-
-./build-$(ConfigurationName)//src_UserPage.cpp$(ObjectSuffix): src/UserPage.cpp ./build-$(ConfigurationName)//src_UserPage.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/UserPage.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_UserPage.cpp$(ObjectSuffix) $(IncludePath)
-./build-$(ConfigurationName)//src_UserPage.cpp$(DependSuffix): src/UserPage.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT./build-$(ConfigurationName)//src_UserPage.cpp$(ObjectSuffix) -MF./build-$(ConfigurationName)//src_UserPage.cpp$(DependSuffix) -MM src/UserPage.cpp
-
-./build-$(ConfigurationName)//src_UserPage.cpp$(PreprocessSuffix): src/UserPage.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_UserPage.cpp$(PreprocessSuffix) src/UserPage.cpp
-
-./build-$(ConfigurationName)//main.cpp$(ObjectSuffix): main.cpp ./build-$(ConfigurationName)//main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
-./build-$(ConfigurationName)//main.cpp$(DependSuffix): main.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT./build-$(ConfigurationName)//main.cpp$(ObjectSuffix) -MF./build-$(ConfigurationName)//main.cpp$(DependSuffix) -MM main.cpp
-
-./build-$(ConfigurationName)//main.cpp$(PreprocessSuffix): main.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//main.cpp$(PreprocessSuffix) main.cpp
-
-./build-$(ConfigurationName)//src_Windows.cpp$(ObjectSuffix): src/Windows.cpp ./build-$(ConfigurationName)//src_Windows.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/Windows.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_Windows.cpp$(ObjectSuffix) $(IncludePath)
-./build-$(ConfigurationName)//src_Windows.cpp$(DependSuffix): src/Windows.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT./build-$(ConfigurationName)//src_Windows.cpp$(ObjectSuffix) -MF./build-$(ConfigurationName)//src_Windows.cpp$(DependSuffix) -MM src/Windows.cpp
-
-./build-$(ConfigurationName)//src_Windows.cpp$(PreprocessSuffix): src/Windows.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_Windows.cpp$(PreprocessSuffix) src/Windows.cpp
-
-./build-$(ConfigurationName)//src_LoginPage.cpp$(ObjectSuffix): src/LoginPage.cpp ./build-$(ConfigurationName)//src_LoginPage.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/LoginPage.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_LoginPage.cpp$(ObjectSuffix) $(IncludePath)
-./build-$(ConfigurationName)//src_LoginPage.cpp$(DependSuffix): src/LoginPage.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT./build-$(ConfigurationName)//src_LoginPage.cpp$(ObjectSuffix) -MF./build-$(ConfigurationName)//src_LoginPage.cpp$(DependSuffix) -MM src/LoginPage.cpp
-
-./build-$(ConfigurationName)//src_LoginPage.cpp$(PreprocessSuffix): src/LoginPage.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_LoginPage.cpp$(PreprocessSuffix) src/LoginPage.cpp
 
 ./build-$(ConfigurationName)//src_User.cpp$(ObjectSuffix): src/User.cpp ./build-$(ConfigurationName)//src_User.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/User.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_User.cpp$(ObjectSuffix) $(IncludePath)
@@ -156,6 +116,30 @@ PreBuild:
 ./build-$(ConfigurationName)//src_Global.cpp$(PreprocessSuffix): src/Global.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_Global.cpp$(PreprocessSuffix) src/Global.cpp
 
+./build-$(ConfigurationName)//main.cpp$(ObjectSuffix): main.cpp ./build-$(ConfigurationName)//main.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+./build-$(ConfigurationName)//main.cpp$(DependSuffix): main.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT./build-$(ConfigurationName)//main.cpp$(ObjectSuffix) -MF./build-$(ConfigurationName)//main.cpp$(DependSuffix) -MM main.cpp
+
+./build-$(ConfigurationName)//main.cpp$(PreprocessSuffix): main.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//main.cpp$(PreprocessSuffix) main.cpp
+
+./build-$(ConfigurationName)//src_LoginPage.cpp$(ObjectSuffix): src/LoginPage.cpp ./build-$(ConfigurationName)//src_LoginPage.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/LoginPage.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_LoginPage.cpp$(ObjectSuffix) $(IncludePath)
+./build-$(ConfigurationName)//src_LoginPage.cpp$(DependSuffix): src/LoginPage.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT./build-$(ConfigurationName)//src_LoginPage.cpp$(ObjectSuffix) -MF./build-$(ConfigurationName)//src_LoginPage.cpp$(DependSuffix) -MM src/LoginPage.cpp
+
+./build-$(ConfigurationName)//src_LoginPage.cpp$(PreprocessSuffix): src/LoginPage.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_LoginPage.cpp$(PreprocessSuffix) src/LoginPage.cpp
+
+./build-$(ConfigurationName)//src_StudentPage.cpp$(ObjectSuffix): src/StudentPage.cpp ./build-$(ConfigurationName)//src_StudentPage.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/StudentPage.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_StudentPage.cpp$(ObjectSuffix) $(IncludePath)
+./build-$(ConfigurationName)//src_StudentPage.cpp$(DependSuffix): src/StudentPage.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT./build-$(ConfigurationName)//src_StudentPage.cpp$(ObjectSuffix) -MF./build-$(ConfigurationName)//src_StudentPage.cpp$(DependSuffix) -MM src/StudentPage.cpp
+
+./build-$(ConfigurationName)//src_StudentPage.cpp$(PreprocessSuffix): src/StudentPage.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_StudentPage.cpp$(PreprocessSuffix) src/StudentPage.cpp
+
 ./build-$(ConfigurationName)//src_Report.cpp$(ObjectSuffix): src/Report.cpp ./build-$(ConfigurationName)//src_Report.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/Report.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_Report.cpp$(ObjectSuffix) $(IncludePath)
 ./build-$(ConfigurationName)//src_Report.cpp$(DependSuffix): src/Report.cpp
@@ -163,6 +147,38 @@ PreBuild:
 
 ./build-$(ConfigurationName)//src_Report.cpp$(PreprocessSuffix): src/Report.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_Report.cpp$(PreprocessSuffix) src/Report.cpp
+
+./build-$(ConfigurationName)//src_ApprovalPage.cpp$(ObjectSuffix): src/ApprovalPage.cpp ./build-$(ConfigurationName)//src_ApprovalPage.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/ApprovalPage.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_ApprovalPage.cpp$(ObjectSuffix) $(IncludePath)
+./build-$(ConfigurationName)//src_ApprovalPage.cpp$(DependSuffix): src/ApprovalPage.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT./build-$(ConfigurationName)//src_ApprovalPage.cpp$(ObjectSuffix) -MF./build-$(ConfigurationName)//src_ApprovalPage.cpp$(DependSuffix) -MM src/ApprovalPage.cpp
+
+./build-$(ConfigurationName)//src_ApprovalPage.cpp$(PreprocessSuffix): src/ApprovalPage.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_ApprovalPage.cpp$(PreprocessSuffix) src/ApprovalPage.cpp
+
+./build-$(ConfigurationName)//src_Windows.cpp$(ObjectSuffix): src/Windows.cpp ./build-$(ConfigurationName)//src_Windows.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/Windows.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_Windows.cpp$(ObjectSuffix) $(IncludePath)
+./build-$(ConfigurationName)//src_Windows.cpp$(DependSuffix): src/Windows.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT./build-$(ConfigurationName)//src_Windows.cpp$(ObjectSuffix) -MF./build-$(ConfigurationName)//src_Windows.cpp$(DependSuffix) -MM src/Windows.cpp
+
+./build-$(ConfigurationName)//src_Windows.cpp$(PreprocessSuffix): src/Windows.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_Windows.cpp$(PreprocessSuffix) src/Windows.cpp
+
+./build-$(ConfigurationName)//src_UserPage.cpp$(ObjectSuffix): src/UserPage.cpp ./build-$(ConfigurationName)//src_UserPage.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/UserPage.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_UserPage.cpp$(ObjectSuffix) $(IncludePath)
+./build-$(ConfigurationName)//src_UserPage.cpp$(DependSuffix): src/UserPage.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT./build-$(ConfigurationName)//src_UserPage.cpp$(ObjectSuffix) -MF./build-$(ConfigurationName)//src_UserPage.cpp$(DependSuffix) -MM src/UserPage.cpp
+
+./build-$(ConfigurationName)//src_UserPage.cpp$(PreprocessSuffix): src/UserPage.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_UserPage.cpp$(PreprocessSuffix) src/UserPage.cpp
+
+./build-$(ConfigurationName)//src_DataPage.cpp$(ObjectSuffix): src/DataPage.cpp ./build-$(ConfigurationName)//src_DataPage.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/DataPage.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_DataPage.cpp$(ObjectSuffix) $(IncludePath)
+./build-$(ConfigurationName)//src_DataPage.cpp$(DependSuffix): src/DataPage.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT./build-$(ConfigurationName)//src_DataPage.cpp$(ObjectSuffix) -MF./build-$(ConfigurationName)//src_DataPage.cpp$(DependSuffix) -MM src/DataPage.cpp
+
+./build-$(ConfigurationName)//src_DataPage.cpp$(PreprocessSuffix): src/DataPage.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ./build-$(ConfigurationName)//src_DataPage.cpp$(PreprocessSuffix) src/DataPage.cpp
 
 ./build-$(ConfigurationName)//src_Rooms.cpp$(ObjectSuffix): src/Rooms.cpp ./build-$(ConfigurationName)//src_Rooms.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jerry/Documents/booking-system/src/Rooms.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_Rooms.cpp$(ObjectSuffix) $(IncludePath)

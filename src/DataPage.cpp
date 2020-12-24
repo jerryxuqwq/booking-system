@@ -31,23 +31,8 @@ DataPage::DataPage()
 	m_assistant_new.signal_apply().connect(
 	    sigc::mem_fun(*this, &DataPage::Update));
 //Fill popup menu:
-	auto item = Gtk::make_managed<Gtk::MenuItem>("_New", true);
-	item->signal_activate().connect(sigc::mem_fun(*this,
-	                                &DataPage::on_menu_file_popup_new));
-	m_Menu_Popup.append(*item);
 
-//	item = Gtk::make_managed<Gtk::MenuItem>("_Process", true);
-//	item->signal_activate().connect(
-//	    sigc::mem_fun(*this, &DataPage::on_menu_file_popup_generic));
-//	m_Menu_Popup.append(*item);
 
-	item = Gtk::make_managed<Gtk::MenuItem>("_Delete", true);
-	item->signal_activate().connect(
-	    sigc::mem_fun(*this,&DataPage::on_menu_file_popup_delete));
-	m_Menu_Popup.append(*item);
-
-	m_Menu_Popup.accelerate(*this);
-	m_Menu_Popup.show_all(); //Show all menu items when the menu pops up
 }
 
 DataPage::~DataPage()
@@ -87,7 +72,7 @@ void DataPage::on_menu_file_popup_delete()
 		{
 			int id = (*iter)[m_Columns.m_col_apm_id];
 			//std::cout << "  Delete ID=" << id << std::endl;
-			DelAppointment.del(id);
+			MyAppointment.del(id);
 			Update();
 		}
 

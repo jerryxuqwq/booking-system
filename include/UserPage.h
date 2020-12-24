@@ -10,6 +10,8 @@
 
 #include <gtkmm.h>
 #include <DataPage.h>
+#include "ApprovalPage.h"
+#include "StudentPage.h"
 #include <User.h>
 
 class UserPage: public Gtk::Window
@@ -32,7 +34,7 @@ protected:
 
 	Gtk::ScrolledWindow m_ScrolledWindow;
 	Gtk::Label m_Label_Username;
-	DataPage m_TreeView;
+	ApprovalPage m_TreeView;
 
 	Gtk::ButtonBox m_ButtonBox;
 	Gtk::Button m_Button_Quit;

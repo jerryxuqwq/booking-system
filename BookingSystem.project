@@ -17,30 +17,34 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="include">
-    <File Name="include/DataPage.h"/>
-    <File Name="include/NewApointmentPage.h"/>
-    <File Name="include/Database.h"/>
+    <File Name="include/StudentPage.h"/>
+    <File Name="include/Appointment.h"/>
+    <File Name="include/LoginPage.h"/>
     <File Name="include/Global.h"/>
-    <File Name="include/Windows.h"/>
+    <File Name="include/Report.h"/>
+    <File Name="include/Database.h"/>
+    <File Name="include/Rooms.h"/>
+    <File Name="include/ApprovalPage.h"/>
+    <File Name="include/DataPage.h"/>
     <File Name="include/UserPage.h"/>
     <File Name="include/User.h"/>
-    <File Name="include/Rooms.h"/>
-    <File Name="include/Report.h"/>
-    <File Name="include/LoginPage.h"/>
-    <File Name="include/Appointment.h"/>
+    <File Name="include/Windows.h"/>
+    <File Name="include/NewApointmentPage.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
-    <File Name="src/DataPage.cpp"/>
-    <File Name="src/NewApointmentPage.cpp"/>
-    <File Name="src/Global.cpp"/>
+    <File Name="src/StudentPage.cpp"/>
     <File Name="main.cpp"/>
-    <File Name="src/Windows.cpp"/>
-    <File Name="src/UserPage.cpp"/>
-    <File Name="src/User.cpp"/>
-    <File Name="src/Rooms.cpp"/>
-    <File Name="src/Report.cpp"/>
+    <File Name="src/DataPage.cpp"/>
+    <File Name="src/Global.cpp"/>
     <File Name="src/LoginPage.cpp"/>
+    <File Name="src/Windows.cpp"/>
+    <File Name="src/NewApointmentPage.cpp"/>
+    <File Name="src/UserPage.cpp"/>
+    <File Name="src/Rooms.cpp"/>
+    <File Name="src/User.cpp"/>
+    <File Name="src/Report.cpp"/>
     <File Name="src/Appointment.cpp"/>
+    <File Name="src/ApprovalPage.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

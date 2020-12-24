@@ -38,9 +38,6 @@ int Appointment::add(int apm_room_id, int apm_user_id,
 	//std::cout<<query<<std::endl;
 	query.execute();
 
-
-
-
 	return 1;
 }
 
@@ -145,6 +142,26 @@ std::vector<appointment_data> Appointment::DateUpdate(mysqlpp::sql_date
 	}
 
 	return data;
+}
+
+int Appointment::change_approve(int apm_id, int state)
+{
+	mysqlpp::Connection conn(false);
+	conn.set_option(new mysqlpp::SetCharsetNameOption("utf8"));
+	conn.connect(db, server, user, password);
+	// Form the query to insert the row into the stock table.
+	mysqlpp::Query query = conn.query();
+//	query << "INSERT INTO `appointment`"<<
+//	      "(`apm_room_id`,`apm_user_id`,`apm_reason`,`apm_begin_date`,`apm_begin_time`)"
+//	      <<"VALUES("+
+//	      std::to_string(apm_room_id)+","+std::to_string(apm_user_id)+
+//	      ",\""+apm_reason+"\",'"+date.str()+"','"+time.str()+
+//	      "')";
+	query << "UPDATE appointment SET apm_approve_status=\'"<<std::to_string(state)<<"\' WHERE apm_id="<<std::to_string(apm_id);
+	      //std::cout<<query<<std::endl;
+	query.execute();
+
+	return 1;
 }
 
 int Appointment::ConvertToPeriod(mysqlpp::sql_time apm_begin_time)

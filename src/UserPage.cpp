@@ -21,6 +21,7 @@ UserPage::UserPage() :
 	set_default_size(600, 300);
 
 	add(m_VBox);
+	
 
 	//Add the TreeView, inside a ScrolledWindow, with the button underneath:
 	m_ScrolledWindow.add(m_TreeView);

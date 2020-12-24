@@ -34,6 +34,7 @@ protected:
 	void on_menu_file_popup_delete();
 	void on_menu_file_popup_new();
 
+
 	//Tree model columns:
 	class ModelColumns: public Gtk::TreeModel::ColumnRecord
 	{
@@ -66,7 +67,7 @@ protected:
 	Gtk::Menu m_Menu_Popup;
 	NewApointmentPage m_assistant_new;
 	
-	Appointment DelAppointment;
+	Appointment MyAppointment;
 
 
 };
