@@ -6,7 +6,7 @@
  */
 
 #include "UserPage.h"
-
+#include "Global.h"
 UserPage::~UserPage()
 {
 	// TODO Auto-generated destructor stub
@@ -19,18 +19,12 @@ UserPage::UserPage() :
 	set_title("Meeting system GUI");
 	set_border_width(5);
 	set_default_size(600, 300);
-
 	add(m_VBox);
-	
 
 	//Add the TreeView, inside a ScrolledWindow, with the button underneath:
-	m_ScrolledWindow.add(m_TreeView);
-
 	//Only show the scrollbars when they are necessary:
 	m_ScrolledWindow.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
 
-	m_VBox.pack_start(m_ScrolledWindow);
-	m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
 
 	m_ButtonBox.pack_start(m_Label_Username);
 
@@ -46,7 +40,6 @@ UserPage::UserPage() :
 	    sigc::mem_fun(*this, &UserPage::on_button_refresh));
 //	m_Button_New.signal_clicked().connect(
 //	    sigc::mem_fun(*this, &UserPage::on_button_new));
-	show_all_children();
 
 }
 
@@ -59,12 +52,35 @@ void UserPage::Update()
 {
 	m_Label_Username.set_text("欢迎 "+ LoginUser.GetUserName());
 	//std::cout<<"UserName in UserPage"<<LoginUser.GetUserName()<<std::endl;
-	m_TreeView.Update();
+	m_TreeView_Student.Update();
+	m_TreeView_Approval.Update();
+
+
+	m_VBox.remove(m_ScrolledWindow);
+	m_VBox.remove(m_ButtonBox);
+
+	switch(LoginUser.GetUserLevel())
+	{
+	case 0:
+		m_ScrolledWindow.add(m_TreeView_Student);
+		break;
+
+	case 1:
+		m_ScrolledWindow.add(m_TreeView_Approval);
+		break;
+
+	}
+
+	m_VBox.pack_start(m_ScrolledWindow);
+	m_VBox.pack_start(m_ButtonBox, Gtk::PACK_SHRINK);
+	show_all_children();
+
 }
 
 void UserPage::on_button_refresh()
 {
-	m_TreeView.Update();
+	m_TreeView_Student.Update();
+	m_TreeView_Approval.Update();
 	//std::cout<<"refresh"<<std::endl;
 
 }

@@ -339,3 +339,51 @@ std::vector<appointment_data> Appointment::DateUpdate(int apm_room_id,
 
 	return data;
 }
+
+std::vector<appointment_data> Appointment::Update()
+{
+	mysqlpp::Connection conn(false);
+	conn.set_option(new mysqlpp::SetCharsetNameOption("utf8"));
+	conn.connect(db, server, user, password);
+
+	mysqlpp::Query query =
+	    conn.query("SELECT * FROM `appointment`");
+	//std::cout<<query<<std::endl;
+	std::vector<appointment_data> data;
+	appointment_data apm_data;
+
+	if(mysqlpp::StoreQueryResult res = query.store())
+	{
+
+		mysqlpp::StoreQueryResult::const_iterator it;
+
+		for(it = res.begin(); it != res.end(); ++it)
+		{
+
+			mysqlpp::Row row = *it;
+
+			apm_data.apm_id = row[0];
+			apm_data.apm_room_id = row[1];
+			apm_data.apm_user_id = row[2];
+			apm_data.apm_begin_date = row[3];
+			apm_data.apm_begin_time = row[4];
+			apm_data.apm_end_date = row[5];
+			apm_data.apm_end_time = row[6];
+			apm_data.apm_approve_status = row[7];
+			apm_data.apm_reason.assign((row[8]));
+			apm_data.apm_period=ConvertToPeriod(row[4]);
+			data.push_back(apm_data);
+//			std::cout << " " << row[0] << row[1] << row[2]<<row[3] << row[4] << row[5]
+//			          << row[6] << std::endl;
+//			std::string test = apm_data.apm_reason.assign((row[6]));
+//			std::cout << "in apm_data  " << apm_data.apm_id << "  "
+//					<< apm_data.apm_room_id << "  " << apm_data.apm_user_id
+//					<< "  " << "  " << apm_data.apm_end_date << "  "
+//					<< apm_data.apm_begin_date << "  "
+//					<< apm_data.apm_approve_status << std::endl;
+		}
+
+	}
+
+	return data;
+}

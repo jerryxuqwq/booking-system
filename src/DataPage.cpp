@@ -77,8 +77,7 @@ void DataPage::on_menu_file_popup_delete()
 		}
 
 	}
-
-
+	
 }
 void DataPage::on_menu_file_popup_generic()
 {
@@ -101,7 +100,6 @@ void DataPage::on_menu_file_popup_generic()
 void DataPage::on_menu_file_popup_new()
 {
 	m_assistant_new.show();
-	std::cout<<"show new page"<<std::endl;
 	Update();
 }
 

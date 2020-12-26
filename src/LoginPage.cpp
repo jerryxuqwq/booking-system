@@ -61,13 +61,15 @@ void LoginPage::on_Buttom_Login_A()
 	{
 
 	case 1:
-
+	{
 		//LoginUser.Update(LoginUserData.user_id);
 		LoginUser.Update();
 		//std::cout<<"username in LoginPage="<<LoginUser.GetUserName()<<std::endl;
-		win.Update();
-		win.show();
+		UserPage* win=new UserPage();
+		win->Update();
+		win->show();
 		break;
+	}
 
 	case 0:
 	{

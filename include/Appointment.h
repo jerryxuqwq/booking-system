@@ -39,6 +39,7 @@ public:
 	mysqlpp::Time ConvertToBeginTime(int period);
 	mysqlpp::Time ConvertToEndTime(int period);
 	std::vector<appointment_data> UserUpdate(int user_id);
+	std::vector<appointment_data> Update();
 	std::vector<appointment_data> DateUpdate(mysqlpp::sql_date apm_begin_date);
 	std::vector<appointment_data> DateUpdate(int apm_room_id,
 	        mysqlpp::sql_date apm_begin_date);

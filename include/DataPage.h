@@ -48,6 +48,7 @@ protected:
 			add(m_col_begin_date);
 			add(m_col_approve_status);
 			add(m_col_reason);
+			add(m_col_user_name);
 		}
 
 		Gtk::TreeModelColumn<unsigned int> m_col_apm_id;
@@ -56,6 +57,7 @@ protected:
 		Gtk::TreeModelColumn<Glib::ustring> m_col_begin_time;
 		Gtk::TreeModelColumn<Glib::ustring> m_col_reason;
 		Gtk::TreeModelColumn<Glib::ustring> m_col_approve_status;
+		Gtk::TreeModelColumn<Glib::ustring> m_col_user_name;
 
 	};
 

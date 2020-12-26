@@ -25,22 +25,23 @@ protected:
 	//Signal handlers:
 	void on_button_quit();
 //	void on_button_new();
-	
-	
+
+
 	void on_button_refresh();
-	
+
 	//Child widgets:
 	Gtk::Box m_VBox;
 
 	Gtk::ScrolledWindow m_ScrolledWindow;
 	Gtk::Label m_Label_Username;
-	ApprovalPage m_TreeView;
+	ApprovalPage m_TreeView_Approval;
+	StudentPage m_TreeView_Student;
 
 	Gtk::ButtonBox m_ButtonBox;
 	Gtk::Button m_Button_Quit;
 	Gtk::Button m_Button_New;
 	Gtk::Button m_Button_Refresh;
-	
+
 };
 
 #endif /* INCLUDE_USERPAGE_H_ */
