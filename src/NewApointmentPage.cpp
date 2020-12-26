@@ -150,41 +150,34 @@ void NewApointmentPage::on_assistant_prepare(Gtk::Widget* /* widget */)
 }
 void NewApointmentPage::PullAPMData()
 {
-
+	Gtk::TreeModel::Row row;
+	User ApplyUser;
 
 	std::vector<appointment_data> apms = NewAppointment.DateUpdate(C_room,Sdate);
-	
-	std::vector<int> exist_period;
-	std::vector<int> avaliavle_period;
+
+
 
 	m_refTreeModel_APM->clear();
 
-	for(int i=0; i<apms.size(); i++)
-	{
-		std::cout<<NewAppointment.ConvertToPeriod(apms[i].apm_begin_time)<<std::endl;
-		exist_period.push_back(NewAppointment.ConvertToPeriod(apms[i].apm_begin_time));
-	}
 
 	for(int i=1; i<=11; i++)
 	{
-		avaliavle_period.push_back(i);
+		row= *(m_refTreeModel_APM->append());
+		row[m_Columns.m_col_period] = i;
+		row[m_Columns.m_col_begin_time] = NewAppointment.ConvertToBeginTime(
+		                                      i).str();
+		row[m_Columns.m_col_approve_status] = "Empty";
 
-		for(int j=0; j<exist_period.size(); j++)
+		for(int j=0; j<apms.size(); j++)
 		{
-			if(i==exist_period[j])
+			if(i==apms[j].apm_period)
 			{
-				avaliavle_period.pop_back();
+				ApplyUser.SetUserId(apms[j].apm_user_id);
+				ApplyUser.Update();
+				row[m_Columns.m_col_approve_status] = ApplyUser.GetUserName();
+				exist_period.push_back(i);
 			}
 		}
-	}
-
-	for(int i=0; i<avaliavle_period.size(); i++)
-	{
-		Gtk::TreeModel::Row row = *(m_refTreeModel_APM->append());
-		row[m_Columns.m_col_period] = avaliavle_period[i];
-		row[m_Columns.m_col_begin_time] = NewAppointment.ConvertToBeginTime(
-		                                      avaliavle_period[i]).str();
-		row[m_Columns.m_col_approve_status] = "Empty";
 	}
 
 }
@@ -199,7 +192,19 @@ void NewApointmentPage::PullRoomData()
 		row[m_Columns.m_col_room_id] = rooms[i].room_id;
 		row[m_Columns.m_col_room_name] = rooms[i].room_name;
 		row[m_Columns.m_col_room_dsp] = rooms[i].room_dsp;
-		row[m_Columns.m_col_room_status] = rooms[i].room_status;
+
+		switch(rooms[i].room_status)
+		{
+		case 0:
+			row[m_Columns.m_col_room_status] = "OFS";
+			broken_room.push_back(rooms[i].room_id);
+			break;
+
+		case 1:
+			row[m_Columns.m_col_room_status] = "In service";
+			break;
+		}
+
 	}
 
 }
@@ -223,10 +228,26 @@ void NewApointmentPage::on_entry_changed()
 		Sdate.year(year);
 		Sdate.day(day);
 		Gtk::TreeModel::iterator iter = refSelection->get_selected();
+		
+		set_page_complete(m_box, true);
+		set_page_complete(m_label2, true);
 
 		if(iter)
 		{
 			C_room = (*iter)[m_Columns.m_col_room_id];
+
+			for(int i=0; i<broken_room.size(); i++)
+			{
+				if(C_room==broken_room[i])
+				{
+					set_page_complete(m_box, false);
+					Gtk::MessageDialog dialog(*this, "Note");
+					dialog.set_secondary_text("This room is out of service");
+					dialog.run();
+				}
+
+			}
+
 			text="You will book "+
 			     (*iter)[m_Columns.m_col_room_name]+
 			     " at "
@@ -235,8 +256,7 @@ void NewApointmentPage::on_entry_changed()
 			     +std::to_string(year)+" ";
 		}
 
-		set_page_complete(m_box, true);
-		set_page_complete(m_label2, true);
+
 
 	}
 }
@@ -252,8 +272,20 @@ void NewApointmentPage::on_entry_changed_APM()
 		{
 			C_period = (*iter)[m_Columns.m_col_period];
 			m_label2.set_text(text+(*iter)[m_Columns.m_col_begin_time]);
-		}
+			set_page_complete(m_box1, true);
 
-		set_page_complete(m_box1, true);
+			for(int i=0; i<exist_period.size(); i++)
+			{
+				if(C_period==exist_period[i])
+				{
+					set_page_complete(m_box1, false);
+					Gtk::MessageDialog dialog(*this, "Note");
+					dialog.set_secondary_text("This room is reserved");
+					dialog.run();
+				}
+
+			}
+		}
 	}
+
 }

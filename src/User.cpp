@@ -66,7 +66,6 @@ int User::Login(Glib::ustring Username, Glib::ustring Password)
 
 	else
 	{
-		std::cout<<"cannot connect to the database"<<std::endl;
 		return 2;
 	}
 

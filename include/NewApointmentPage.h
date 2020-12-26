@@ -7,6 +7,7 @@
 #include "Appointment.h"
 #include "mysql++.h"
 #include <time.h>
+#include "User.h"
 
 
 class NewApointmentPage: public Gtk::Assistant
@@ -64,7 +65,7 @@ protected:
 		Gtk::TreeModelColumn<unsigned int> m_col_room_id;
 		Gtk::TreeModelColumn<Glib::ustring> m_col_room_name;
 		Gtk::TreeModelColumn<Glib::ustring> m_col_room_dsp;
-		Gtk::TreeModelColumn<int> m_col_room_status;
+		Gtk::TreeModelColumn<Glib::ustring> m_col_room_status;
 	};
 
 	ModelColumns m_Columns;
@@ -83,6 +84,8 @@ private:
 	Glib::ustring C_reason;
 	Appointment NewAppointment;
 	mysqlpp::sql_date Sdate;
+	std::vector<int> exist_period;
+	std::vector<int> broken_room;
 
 
 };

@@ -28,10 +28,10 @@ int main(int argc, char *argv[])
 
 //	int in_user_id = 1;
 //	cout << endl;
-	mysqlpp::Connection conn(false);
-	char *db = "meetingsystem", *server = "127.0.0.1",
-	      *user = "test",
-	       *password = "PN$iQTg3";
+//	mysqlpp::Connection conn(false);
+//	char *db = "meetingsystem", *server = "127.0.0.1",
+//	      *user = "test",
+//	       *password = "PN$iQTg3";
 
 	return 0;
 }

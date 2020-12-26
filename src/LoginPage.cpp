@@ -83,7 +83,7 @@ void LoginPage::on_Buttom_Login_A()
 	case 0:
 	{
 		Gtk::MessageDialog dialog(*this, "Error");
-		dialog.set_secondary_text("Error");
+		dialog.set_secondary_text("Please check your Password or Username");
 		dialog.run();
 		break;
 	}
@@ -91,7 +91,7 @@ void LoginPage::on_Buttom_Login_A()
 	case 2:
 	{
 		Gtk::MessageDialog dialog(*this, "Error");
-		dialog.set_secondary_text("No DataBase");
+		dialog.set_secondary_text("Cannot find DataBase. Please contact system administor");
 		dialog.run();
 		break;
 	}
