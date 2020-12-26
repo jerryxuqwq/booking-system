@@ -33,4 +33,7 @@
 
 # CodeLite Tags File
 .codelite/CodeLite-jerry.tags
-build-Debug
+.codelite/CodeLite.session
+/build-Debug
+BookingSystem.mk
+BookingSystem.project

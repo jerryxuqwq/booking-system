@@ -64,10 +64,19 @@ void LoginPage::on_Buttom_Login_A()
 	{
 		//LoginUser.Update(LoginUserData.user_id);
 		LoginUser.Update();
+
 		//std::cout<<"username in LoginPage="<<LoginUser.GetUserName()<<std::endl;
-		UserPage* win=new UserPage();
+
+		if(win!=NULL)
+		{
+			delete win;
+		}
+		
+		win= new UserPage();
+		//User NewUser;
 		win->Update();
 		win->show();
+
 		break;
 	}
 
