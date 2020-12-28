@@ -3,7 +3,7 @@
   <Project Name="BookingSystem" Path="BookingSystem.project" Active="Yes"/>
   <Project Name="AssistantTest" Path="AssistantTest/AssistantTest.project" Active="No"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="Debug" Selected="yes">
+    <WorkspaceConfiguration Name="Debug" Selected="no">
       <Environment/>
       <Project Name="BookingSystem" ConfigName="Debug"/>
       <Project Name="AssistantTest" ConfigName="Debug"/>

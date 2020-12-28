@@ -49,11 +49,9 @@ int User::Login(Glib::ustring Username, Glib::ustring Password)
 					is_login = true;
 
 					return 1;
-
-
 				}
 
-				else if(it >= res.end())
+				else if(it == res.end()-1)
 				{
 
 					is_login = false;
